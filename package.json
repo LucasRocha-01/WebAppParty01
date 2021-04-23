@@ -8,8 +8,12 @@
     "build": "cross-env NODE_ENV=production webpack"
   },
   "dependencies": {
+    "@unform/core": "^2.1.6",
+    "@unform/web": "^2.1.6",
+    "polished": "^4.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
     "styled-components": "^5.2.3"
   },
   "devDependencies": {

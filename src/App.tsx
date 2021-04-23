@@ -8,9 +8,9 @@ export function App() {
     return (
         <>
             <GlobalStyle />
-            <Main />
-            {/* <SignIn />
-            <SignUp /> */}
+            {/* <Main /> */}
+            {/* <SignIn /> */}
+            <SignUp />
         </>
     )
 }

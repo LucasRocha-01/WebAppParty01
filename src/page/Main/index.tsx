@@ -1,3 +1,4 @@
+import React from 'react';
 import { BoxParty } from "../../components/BoxParty";
 import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
 

@@ -93,6 +93,13 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const HeaderView = styled.div`
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+    /* background: var(--white); */
     background: var(--black-medium);
 
     height: 100px;
@@ -100,8 +107,9 @@ export const HeaderView = styled.div`
     div {
         background: var(--black-medium);
 
-        justify-content: center;
+        width: 1080px;
+
         display: flex;
-        max-width: 1080px;
+        justify-content: space-between;
     }
 `;
