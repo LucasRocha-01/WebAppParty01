@@ -35,7 +35,8 @@ export function SignUp() {
                         </label>
                     </form> */}
 
-                    <Form ref={formRef} onSubmit={handleSubmit}>
+comentado para tirar erro temporarily
+                    {/* <Form ref={formRef} onSubmit={handleSubmit}>
                         <h1>Faça o seu Registro</h1>
                         
                         <Input name="name" icon={FiUser} placeholder="Nome"/>
@@ -47,7 +48,7 @@ export function SignUp() {
                             Entrar
                         </Button>
 
-                    </Form>
+                    </Form> */}
 
                 </AnimationContainer>
             </Content>

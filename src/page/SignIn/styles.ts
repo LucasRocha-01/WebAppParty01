@@ -57,7 +57,8 @@ export const AnimationContainer = styled.div`
         transition: color 0.2s;
 
         &:hover {
-          color ${shade(0.2, '#f4ede8')};
+          // eslint-disable-next-line
+          color: ${shade(0.2, '#f4ede8')}; 
         }
       }
     }
@@ -77,7 +78,7 @@ export const AnimationContainer = styled.div`
       }
 
       &:hover {
-        color ${shade(0.2, '#ff9000')};
+        color: ${shade(0.2, '#ff9000')};
       }
     }
 `;
