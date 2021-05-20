@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 
 import { BoxParty } from "../../components/BoxParty";
 import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
+import { Button } from "../../styles/globalStyles"
 
 import CalendarImg from "../../assets/images/calendar.svg";
 import logoImg from "../../assets/images/logo.png";
@@ -12,11 +13,24 @@ import PartyImg from "../../assets/images/party.jpg";
 
 import { HeaderView } from "../../styles/globalStyles";
 
+import Modal from "react-modal";
+
+
 export function PartysTable() {
     useEffect(() => {
         api.get('partys')
         .then(response => console.log(response.data))
     }, []);
+
+    const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
+
+    function handleOpenNewPartyModal() {
+        setIsNewPartyModalOpen(true);
+    }
+
+    function handleClosedNewPartyModal() {
+        setIsNewPartyModalOpen(false);
+    }
 
     return(
         <>
@@ -48,7 +62,19 @@ export function PartysTable() {
                         </BoxContent>
                     </div>
                     <div>
-                        <button>Nova Festa</button>
+                        <Button 
+                            onClick={handleOpenNewPartyModal}
+                        >
+                        Nova Festa
+                        </Button>
+
+                        <Modal 
+                            isOpen={isNewPartyModalOpen}
+                            onRequestClose={handleClosedNewPartyModal}
+                        >
+                            <h2>Cadastrar transações</h2>
+                        </Modal>
+
                         <Anuncio>
                             <h1>Anúncios01</h1>
                         </Anuncio>

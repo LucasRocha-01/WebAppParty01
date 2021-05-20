@@ -1,4 +1,5 @@
 import styled, {createGlobalStyle} from 'styled-components'
+import { shade } from 'polished'
 
 export const GlobalStyle = createGlobalStyle`
     :root{
@@ -90,6 +91,23 @@ export const GlobalStyle = createGlobalStyle`
             filter: brightness(0.8)
         }
     }
+`;
+
+export const Button = styled.button`
+  background: var(--blue-light);
+  height: 56px;
+  border-radius: 10px;
+  shadow: var(--black-light);
+  border: 0;
+  padding: 0 16px;
+  color: var(--white);
+  width: 100%;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, '#363F5F')};
+  }
 `;
 
 export const HeaderView = styled.div`
