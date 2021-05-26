@@ -52,7 +52,11 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 600;
     }
 
-
+    [disable] {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
     .react-modal-overlay {
         background: rgba(0, 0, 0, 0.5);
 
@@ -70,7 +74,7 @@ export const GlobalStyle = createGlobalStyle`
     .react-modal-content {
         width: 100%;
         max-width: 576px;
-        background: var(--background);
+        background: var(--white);
         padding: 3rem;
         position: relative;
 
@@ -94,19 +98,20 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Button = styled.button`
-  background: var(--blue-light);
+  background: var(--shape);
   height: 56px;
   border-radius: 10px;
-  shadow: var(--black-light);
+  box-shadow: 2px 2px 10px black;
   border: 0;
   padding: 0 16px;
   color: var(--white);
   width: 100%;
   font-weight: 500;
   transition: background-color 0.2s;
-
+  font-family: 'Poppins', sans-serif;
+  
   &:hover {
-    background: ${shade(0.2, '#363F5F')};
+    background: ${shade(0.2, '#3E3B47')};
   }
 `;
 

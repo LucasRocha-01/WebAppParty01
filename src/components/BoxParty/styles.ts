@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GlobalStyle } from '../../styles/globalStyles'
 
-export const Container = styled.div`
+export const ContainerBP = styled.div`
 
 
     display: flex;
@@ -20,7 +20,7 @@ export const Container = styled.div`
 
 `;
 
-export const Content = styled.div`
+export const ContentBP = styled.div`
 
 
     display: flex;
@@ -62,7 +62,7 @@ export const Content = styled.div`
 
 `;
 
-export const ImgParty = styled.img`
+export const ImgPartyBP = styled.img`
 
     background-size: cover;
     background-repeat: no-repeat;

@@ -13,24 +13,27 @@ import PartyImg from "../../assets/images/party.jpg";
 
 import { HeaderView } from "../../styles/globalStyles";
 
-import Modal from "react-modal";
+import { ContainerBP, ContentBP, ImgPartyBP } from "./styles";
+import horaImg from "../../assets/images/hora.svg";
+interface PartysTableProps {
+    onOpenNewPartyModal: () => void;
+}
 
+interface Party {
+    id: number;
+    title: string;
+    data: string;
+    description: string;
+    category: string;
+}
 
-export function PartysTable() {
+export function PartysTable({onOpenNewPartyModal}: PartysTableProps) {
+    const [partys, setPartys] = useState<Party[]>([]);
+
     useEffect(() => {
-        api.get('partys')
-        .then(response => console.log(response.data))
+        api.get('parties')
+        .then(response => setPartys(response.data.parties))
     }, []);
-
-    const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
-
-    function handleOpenNewPartyModal() {
-        setIsNewPartyModalOpen(true);
-    }
-
-    function handleClosedNewPartyModal() {
-        setIsNewPartyModalOpen(false);
-    }
 
     return(
         <>
@@ -53,28 +56,33 @@ export function PartysTable() {
                         </NextEvent>
 
                         <BoxContent> 
-                            <BoxParty />
-                            <BoxParty />
-                            <BoxParty />
-                            <BoxParty />
-                            <BoxParty />
-                            <BoxParty />    
+                            {partys.map(party => (
+                                    <li key={party.id}>  
+                                        <ContainerBP>
+                                            <span>
+                                                { new Intl.DateTimeFormat('pt-BR').format(
+                                                    new Date(party.data)
+                                                )}
+                                            </span>
+                                            <ContentBP>
+                                                <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
+                                                <span>{party.title}</span>
+
+                                                <img className="hourClock" src={horaImg} />
+                                                <p> {party.title} </p>
+                                            </ContentBP> 
+                                        </ContainerBP> 
+                                    </li>      
+                                )
+                            )}    
                         </BoxContent>
                     </div>
                     <div>
                         <Button 
-                            onClick={handleOpenNewPartyModal}
+                            onClick={onOpenNewPartyModal}
                         >
                         Nova Festa
                         </Button>
-
-                        <Modal 
-                            isOpen={isNewPartyModalOpen}
-                            onRequestClose={handleClosedNewPartyModal}
-                        >
-                            <h2>Cadastrar transações</h2>
-                        </Modal>
-
                         <Anuncio>
                             <h1>Anúncios01</h1>
                         </Anuncio>
