@@ -10,7 +10,7 @@ import { Container, Content, Background, AnimationContainer } from "./styles";
 
 import logoImg from "../../assets/images/logo.png";
 
-export function SignUp() {
+export default function SignUp() {
     const formRef = useRef<FormHandles>(null);
 
     const handleSubmit = console.log('teste')

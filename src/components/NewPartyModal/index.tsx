@@ -1,10 +1,11 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useContext } from 'react';
 import Modal from 'react-modal';
-import { Container } from './styles';
-// import GlobalStyle from '../../styles/globalStyles'
+import { PartiesContext } from '../../PartiesContext';
 
 import CloseImg from '../../assets/images/close.svg';
-import { api } from '../../services/api';
+
+import { Container } from './styles';
+// import GlobalStyle from '../../styles/globalStyles'
 
 Modal.setAppElement('#root')
 
@@ -14,21 +15,29 @@ interface NewPartyModalProps {
 }
 
 export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
+    const {createParty} = useContext(PartiesContext);
+
     const [title, setTitle] = useState('');
+    const [date, setDate] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
 
-
-    function handleCreateNewParty(event: FormEvent) {
+    async function handleCreateNewParty(event: FormEvent) {
         event.preventDefault();
 
-        const data = {
+        await createParty({
             title,
+            date,
             description,
-            category,
-        };
+            category
+        })
 
-        api.post('/parties', data)
+        setTitle('');
+        setDescription('');
+        setCategory('');
+        setDate('');
+
+        onRequestClose();
         
     }
 
@@ -40,10 +49,16 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             className="react-modal-content"
             >
 
-            <button type="button" onClick={onRequestClose} className="react-modal-close"> 
+            <button 
+                type="button" 
+                onClick={onRequestClose} 
+                className="react-modal-close"> 
+
                 <img src={CloseImg} alt="Fechar modal" />
             </button>
-            <Container onSubmit={handleCreateNewParty}> 
+
+            <Container 
+                onSubmit={handleCreateNewParty}> 
 
             <h2>Cadastrar Party</h2>
                 
@@ -56,6 +71,12 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 <input placeholder="Descrição da Festa"
                     value={description}
                     onChange={event => setDescription(event.target.value)}
+                />
+
+                <input placeholder="Data da Festa dd/mm/aaaa"
+                    type="datetime-local"
+                    value={date}
+                    onChange={event => setDate(event.target.value)}
                 />
 
                 <input placeholder="Categoria da Festa"

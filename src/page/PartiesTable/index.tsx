@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { api } from '../../services/api';
+import { useContext } from 'react';
 
-import { BoxParty } from "../../components/BoxParty";
 import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
 import { Button } from "../../styles/globalStyles"
 
-import CalendarImg from "../../assets/images/calendar.svg";
+import { Link } from 'react-router-dom';
+
 import logoImg from "../../assets/images/logo.png";
 import outButtomImg from "../../assets/images/outButton.svg";
 
@@ -15,35 +14,27 @@ import { HeaderView } from "../../styles/globalStyles";
 
 import { ContainerBP, ContentBP, ImgPartyBP } from "./styles";
 import horaImg from "../../assets/images/hora.svg";
-interface PartysTableProps {
+import pencilImg from "../../assets/images/pencil.svg";
+import { PartiesContext } from '../../PartiesContext';
+
+interface PartiesTableProps {
     onOpenNewPartyModal: () => void;
 }
 
-interface Party {
-    id: number;
-    title: string;
-    data: string;
-    description: string;
-    category: string;
-}
-
-export function PartysTable({onOpenNewPartyModal}: PartysTableProps) {
-    const [partys, setPartys] = useState<Party[]>([]);
-
-    useEffect(() => {
-        api.get('parties')
-        .then(response => setPartys(response.data.parties))
-    }, []);
+export default function PartiesTable({onOpenNewPartyModal}: PartiesTableProps) {
+    const {parties} = useContext(PartiesContext)
 
     return(
         <>
             <HeaderView>    
                 <div>
-                    <img className="logo" src={logoImg}/>
-                    <img className="outButtom" src={outButtomImg} />
+                    <img alt="test" className="logo" src={logoImg}/>
+                    <img alt="test" className="outButtom" src={outButtomImg} />
+                    
                 </div>            
             </HeaderView>
             <Container>
+                
                 <View>
 
                     <div>
@@ -56,20 +47,19 @@ export function PartysTable({onOpenNewPartyModal}: PartysTableProps) {
                         </NextEvent>
 
                         <BoxContent> 
-                            {partys.map(party => (
+                            {parties.map(party => (
                                     <li key={party.id}>  
                                         <ContainerBP>
-                                            <span>
-                                                { new Intl.DateTimeFormat('pt-BR').format(
-                                                    new Date(party.data)
-                                                )}
-                                            </span>
                                             <ContentBP>
                                                 <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
                                                 <span>{party.title}</span>
 
-                                                <img className="hourClock" src={horaImg} />
-                                                <p> {party.title} </p>
+                                                <img alt="relogio" className="hourClock" src={horaImg} />
+                                                <p> {new Intl.DateTimeFormat('pt-BR').format(
+                                                        new Date(party.date))} </p>
+                                                <button>
+                                                <img alt="editar" className="pencilEdit" src={pencilImg} />
+                                                </button>
                                             </ContentBP> 
                                         </ContainerBP> 
                                     </li>      

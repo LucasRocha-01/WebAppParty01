@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { NewPartyModal } from './components/NewPartyModal';
-import { PartysTable } from './page/PartysTable';
-import { SignIn } from './page/SignIn';
-import { SignUp } from './page/SignUp';
+import PartiesTable from './page/PartiesTable';
+import { PartiesProvider } from './PartiesContext';
 import { GlobalStyle } from './styles/globalStyles';
 
 Modal.setAppElement('#root')
@@ -21,16 +20,17 @@ export function App() {
 
     return (
         <>
-            <GlobalStyle />
-            <PartysTable onOpenNewPartyModal={handleOpenNewPartyModal} />
-            {/* <SignIn /> */}
-            {/* <SignUp /> */}
+            <PartiesProvider>
+                 
+                <GlobalStyle />
+                <PartiesTable onOpenNewPartyModal={handleOpenNewPartyModal} />
 
-            <NewPartyModal 
-                isOpen={isNewPartyModalOpen}
-                onRequestClose={handleClosedNewPartyModal}
-            />
+                <NewPartyModal 
+                    isOpen={isNewPartyModalOpen}
+                    onRequestClose={handleClosedNewPartyModal}
+                />
 
+            </PartiesProvider>
         </>
     )
 }

@@ -40,6 +40,11 @@ export const BoxCalendar = styled.div`
 `;
 
 export const NextEvent = styled.div`
+
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
     background: var(--shape);
 
     width: 100%;
@@ -53,6 +58,7 @@ export const NextEvent = styled.div`
 
     display: grid;
     grid-template-columns: 1fr 1fr;
+
 `;
 
 export const Anuncio = styled.div`
@@ -71,14 +77,16 @@ export const Anuncio = styled.div`
     margin-bottom: 50px;
 `;
 
-export const ImgParty = styled.img`
+export const ImgParty = styled.div`
 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
 
-    width: 100%;
-    height: 100%;
+    border-radius: 9px;
+
+    width: 90%;
+    height: 90%;
 `;
 
 
@@ -143,14 +151,26 @@ export const ContentBP = styled.div`
 
     p {
         color: var(--white);
+        margin-right: 20px ;
+    }
+
+    .pencilEdit {
+        
+        width: 25px;
+        height: 25px;
+
     }
 
 `;
 
-export const ImgPartyBP = styled.img`
+export const ImgPartyBP = styled.div`
 
     background-size: cover;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     background-position: top center;
 
+    border-radius: 50px;
+
+    width: 60px;
+    height: 60px;
 `;

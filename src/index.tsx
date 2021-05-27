@@ -14,28 +14,20 @@ createServer({
                 {
                     id: 1,
                     title: 'color party',
-                    data: new Date('2021-06-15 21:00:00'),
+                    date: new Date(20210615),
                     description: 'lorem ipsum',
                     category: 'Paint',
-                    createdAt: new Date('2021-03-12 09:00:00'),
+                    createdAt: new Date('2021-03-12'),
                 },
                 {
                     id: 2,
-                    title: 'Harry poarty',
-                    data: new Date('2021-07-11 21:00:00'),
+                    title: 'color party',
+                    date: new Date(20210615),
                     description: 'lorem ipsum',
-                    category: 'Fantasy',
-                    createdAt: new Date('2021-05-12 09:00:00'),
-                },
-                {
-                    id: 3,
-                    title: 'Harry poarty',
-                    data: new Date('2021-07-11 21:00:00'),
-                    description: 'lorem ipsum',
-                    category: 'Fantasy',
-                    createdAt: new Date('2021-05-12 09:00:00'),
+                    category: 'Paint',
+                    createdAt: new Date('2021-03-12'),
                 }
-            ],
+            ]
         })
     },
 

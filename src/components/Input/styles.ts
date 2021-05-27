@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 
 import Tooltip from '../Tooltip';
 
-// interface ContainerProps {
-//   isFocused: boolean;
-//   isFilled: boolean;
-//   isErrored: boolean;
-// }
+interface ContainerProps {
+  isFocused: boolean;
+  isFilled: boolean;
+  isErrored: boolean;
+}
 
-export const Container = styled.div`
+export const Container = styled.div<ContainerProps>`
   background: #232129;
   border-radius: 10px;
   padding: 16px;
