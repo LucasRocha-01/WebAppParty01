@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { api } from './services/api';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { api } from '../services/api';
 
 interface Party {
     id: number;
@@ -50,4 +50,10 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             {children}
         </PartiesContext.Provider>
     )    
+}
+
+export function useParties() {
+    const context = useContext(PartiesContext);
+
+    return (context)
 }

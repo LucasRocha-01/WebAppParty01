@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { NewPartyModal } from './components/NewPartyModal';
+import { ViewPartyModal } from './components/ViewPartyModal';
 import PartiesTable from './page/PartiesTable';
-import { PartiesProvider } from './PartiesContext';
+import { PartiesProvider } from './hooks/useParties';
 import { GlobalStyle } from './styles/globalStyles';
 
 Modal.setAppElement('#root')
@@ -18,16 +19,35 @@ export function App() {
         setIsNewPartyModalOpen(false);
     }
 
+
+    const [isViewPartyModalOpen, setIsViewPartyModalOpen] = useState(false);
+
+    function handleOpenViewPartyModal() {
+        setIsViewPartyModalOpen(true);
+    }
+
+    function handleClosedViewPartyModal() {
+        setIsViewPartyModalOpen(false);
+    }
+
     return (
         <>
             <PartiesProvider>
                  
                 <GlobalStyle />
-                <PartiesTable onOpenNewPartyModal={handleOpenNewPartyModal} />
+                <PartiesTable 
+                    onOpenNewPartyModal ={handleOpenNewPartyModal} 
+                    onOpenViewPartyModal={handleOpenViewPartyModal} 
+                />
 
                 <NewPartyModal 
                     isOpen={isNewPartyModalOpen}
                     onRequestClose={handleClosedNewPartyModal}
+                />
+
+                <ViewPartyModal 
+                    isOpen={isViewPartyModalOpen}
+                    onRequestClose={handleClosedViewPartyModal}
                 />
 
             </PartiesProvider>

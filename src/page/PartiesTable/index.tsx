@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-
 import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
 import { Button } from "../../styles/globalStyles"
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import logoImg from "../../assets/images/logo.png";
 import outButtomImg from "../../assets/images/outButton.svg";
@@ -14,16 +12,15 @@ import { HeaderView } from "../../styles/globalStyles";
 
 import { ContainerBP, ContentBP, ImgPartyBP } from "./styles";
 import horaImg from "../../assets/images/hora.svg";
-import pencilImg from "../../assets/images/pencil.svg";
-import { PartiesContext } from '../../PartiesContext';
+import { useParties } from "../../hooks/useParties";
 
 interface PartiesTableProps {
     onOpenNewPartyModal: () => void;
+    onOpenViewPartyModal: () => void;
 }
 
-export default function PartiesTable({onOpenNewPartyModal}: PartiesTableProps) {
-    const {parties} = useContext(PartiesContext)
-
+export default function PartiesTable({onOpenNewPartyModal, onOpenViewPartyModal}: PartiesTableProps) {
+    const {parties} = useParties()
     return(
         <>
             <HeaderView>    
@@ -48,8 +45,10 @@ export default function PartiesTable({onOpenNewPartyModal}: PartiesTableProps) {
 
                         <BoxContent> 
                             {parties.map(party => (
-                                    <li key={party.id}>  
-                                        <ContainerBP>
+                                    <li key={party.id} >  
+                                        <ContainerBP 
+                                            onClick={event => onOpenViewPartyModal()}
+                                        >
                                             <ContentBP>
                                                 <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
                                                 <span>{party.title}</span>
@@ -57,9 +56,6 @@ export default function PartiesTable({onOpenNewPartyModal}: PartiesTableProps) {
                                                 <img alt="relogio" className="hourClock" src={horaImg} />
                                                 <p> {new Intl.DateTimeFormat('pt-BR').format(
                                                         new Date(party.date))} </p>
-                                                <button>
-                                                <img alt="editar" className="pencilEdit" src={pencilImg} />
-                                                </button>
                                             </ContentBP> 
                                         </ContainerBP> 
                                     </li>      

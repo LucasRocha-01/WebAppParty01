@@ -1,8 +1,8 @@
-import { FormEvent, useState, useContext } from 'react';
+import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
-import { PartiesContext } from '../../PartiesContext';
 
 import CloseImg from '../../assets/images/close.svg';
+import { useParties } from '../../hooks/useParties';
 
 import { Container } from './styles';
 // import GlobalStyle from '../../styles/globalStyles'
@@ -15,7 +15,7 @@ interface NewPartyModalProps {
 }
 
 export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
-    const {createParty} = useContext(PartiesContext);
+    const {createParty} = useParties();
 
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
