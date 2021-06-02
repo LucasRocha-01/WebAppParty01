@@ -15,7 +15,9 @@ interface ViewPartyModalProps {
 
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps) {
 
-    // const {parties} = useParties()
+    const {idParty} = useParties()
+
+    console.log('id: ' + idParty);
 
 
     return (

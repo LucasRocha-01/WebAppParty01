@@ -18,7 +18,9 @@ interface PartiesProviderProps {
 
 interface PartiesContextData {
     parties: Party[];
+    idParty: string;
     createParty: (party: PartyInput) => Promise<void>;
+    setIdParty: (idParty: string) => void;
 }
 
 export const PartiesContext = createContext<PartiesContextData>(
@@ -27,6 +29,7 @@ export const PartiesContext = createContext<PartiesContextData>(
 
 export function PartiesProvider({children}: PartiesProviderProps) {
     const [parties, setParties] = useState<Party[]>([]);
+    const [idParty, setIdParty] = useState<string>('');
 
     useEffect(() => {
         api.get('parties')
@@ -46,7 +49,7 @@ export function PartiesProvider({children}: PartiesProviderProps) {
     }
 
     return (
-        <PartiesContext.Provider value={{parties, createParty}}>
+        <PartiesContext.Provider value={{parties, createParty, idParty, setIdParty}}>
             {children}
         </PartiesContext.Provider>
     )    

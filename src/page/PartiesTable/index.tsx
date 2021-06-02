@@ -20,7 +20,8 @@ interface PartiesTableProps {
 }
 
 export default function PartiesTable({onOpenNewPartyModal, onOpenViewPartyModal}: PartiesTableProps) {
-    const {parties} = useParties()
+    const {parties, setIdParty} = useParties()
+    
     return(
         <>
             <HeaderView>    
@@ -47,9 +48,9 @@ export default function PartiesTable({onOpenNewPartyModal, onOpenViewPartyModal}
                             {parties.map(party => (
                                     <li key={party.id} >  
                                         <ContainerBP 
-                                            onClick={event => onOpenViewPartyModal()}
+                                            onClick={() => setIdParty(String(party.id))}
                                         >
-                                            <ContentBP>
+                                            <ContentBP onClick={() => onOpenViewPartyModal()}>
                                                 <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
                                                 <span>{party.title}</span>
 
