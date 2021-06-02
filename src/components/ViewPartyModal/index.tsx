@@ -15,7 +15,9 @@ interface ViewPartyModalProps {
 
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps) {
 
-    const {idParty} = useParties()
+    const {parties, idParty} = useParties()
+
+    let NumIdParty = Number(idParty)
 
     console.log('id: ' + idParty);
 
@@ -38,15 +40,11 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps) {
 
             <Container > 
 
-            <h2>Party Infos</h2>
-                
-                {/* <h1>{parties.filter( party => party.id === id)}</h1> */}
-
-                <h1>Descrição da Festa"</h1>
-
-                <h1>Data da Festa dd/mm/aaaa"</h1>
-
-                <h1>Categoria da Festa"</h1>
+                <h2>Party Infos</h2>
+                    
+                <div>
+                    {parties.filter(party => party.id === NumIdParty )}
+                </div>
 
             </Container>
         </Modal>

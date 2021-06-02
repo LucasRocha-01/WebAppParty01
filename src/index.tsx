@@ -21,10 +21,10 @@ createServer({
                 },
                 {
                     id: 2,
-                    title: 'color party',
-                    date: new Date(20210615),
-                    description: 'lorem ipsum',
-                    category: 'Paint',
+                    title: 'harry party',
+                    date: new Date(20210801),
+                    description: 'blablabal',
+                    category: 'fantasy',
                     createdAt: new Date('2021-03-12'),
                 }
             ]
