@@ -13,13 +13,20 @@ interface ViewPartyModalProps {
     onRequestClose: () => void;
 }
 
+interface filteredPartyProps {
+    title: string;
+}
+
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps) {
 
     const {parties, idParty} = useParties()
 
-    let NumIdParty = Number(idParty)
+    const NumIdParty = idParty
+
+    const filteredParty = parties.filter(party => party.id.toString() === NumIdParty)
 
     console.log('id: ' + idParty);
+    console.log(filteredParty);
 
 
     return (
@@ -40,10 +47,12 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps) {
 
             <Container > 
 
-                <h2>Party Infos</h2>
+                {/* <h2>{filteredParty.title}</h2> */}
+
+                <h1>d</h1>
                     
                 <div>
-                    {parties.filter(party => party.id === NumIdParty )}
+                    <h1>f</h1>
                 </div>
 
             </Container>
