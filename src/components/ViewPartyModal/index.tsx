@@ -14,10 +14,10 @@ interface ViewPartyModalProps {
 }
 
 interface filteredPartyProps {
-    title: string;
+    title?: string;
 }
 
-export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps) {
+export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {title}: filteredPartyProps) {
 
     const {parties, idParty} = useParties()
 

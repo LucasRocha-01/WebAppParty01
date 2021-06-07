@@ -134,5 +134,10 @@ export const HeaderView = styled.div`
 
         display: flex;
         justify-content: space-between;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
     }
 `;

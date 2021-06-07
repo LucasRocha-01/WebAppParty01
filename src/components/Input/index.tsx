@@ -27,7 +27,8 @@ import React, {
       const {fieldName, defaultValue, error, registerField} = useField(name);
 
       const handleInputFocus = useCallback(()=> {
-          setIsFocused(true);
+    // sempre que usar uma função dentro de uma const, usar useCallBack
+        setIsFocused(true);
       }, []);
 
       const handleInputBlur = useCallback(()=> {
@@ -45,10 +46,7 @@ import React, {
       }, [fieldName, registerField]);
 
       return (
-        <Container 
-            isErrored={!!error}
-            isFilled={isFilled} 
-            isFocused={isFocused}>
+        <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
             {Icon && <Icon size={20}/>}
 
             <input

@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import Routes from './routes';
+
 import Modal from 'react-modal';
 import { NewPartyModal } from './components/NewPartyModal';
 import { ViewPartyModal } from './components/ViewPartyModal';
-import PartiesTable from './page/PartiesTable';
+import Dashboard from './page/Dashboard';
 import { PartiesProvider } from './hooks/useParties';
 import { GlobalStyle } from './styles/globalStyles';
 
@@ -31,11 +35,11 @@ export function App() {
     }
 
     return (
-        <>
+        <Router>
             <PartiesProvider>
-                 
+                <Routes />
                 <GlobalStyle />
-                <PartiesTable 
+                <Dashboard 
                     onOpenNewPartyModal ={handleOpenNewPartyModal} 
                     onOpenViewPartyModal={handleOpenViewPartyModal} 
                 />
@@ -51,6 +55,6 @@ export function App() {
                 />
 
             </PartiesProvider>
-        </>
+        </Router>
     )
 }

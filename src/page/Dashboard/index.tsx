@@ -13,13 +13,15 @@ import { HeaderView } from "../../styles/globalStyles";
 import { ContainerBP, ContentBP, ImgPartyBP } from "./styles";
 import horaImg from "../../assets/images/hora.svg";
 import { useParties } from "../../hooks/useParties";
+import React from "react";
+import { Link } from "react-router-dom";
 
-interface PartiesTableProps {
+interface DashboardProps {
     onOpenNewPartyModal: () => void;
     onOpenViewPartyModal: () => void;
 }
 
-export default function PartiesTable({onOpenNewPartyModal, onOpenViewPartyModal}: PartiesTableProps) {
+export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps) {
     const {parties, setIdParty} = useParties()
     
     return(
@@ -27,8 +29,10 @@ export default function PartiesTable({onOpenNewPartyModal, onOpenViewPartyModal}
             <HeaderView>    
                 <div>
                     <img alt="test" className="logo" src={logoImg}/>
-                    <img alt="test" className="outButtom" src={outButtomImg} />
                     
+                    <Link to="/">
+                        <img alt="test" className="outButtom" src={outButtomImg} />
+                    </Link>
                 </div>            
             </HeaderView>
             <Container>
