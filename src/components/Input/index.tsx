@@ -18,7 +18,7 @@ import React, {
     icon?: React.ComponentType<IconBaseProps>;
   }
   
-  const Input: React.FC<InputProps> = ({name, icon: Icon, ...rest}) => {
+  const Input: React.FC<InputProps> = ({name, icon: Icon, value, ...rest}) => {
       const inputRef =useRef<HTMLInputElement>(null);
 
       const [isFocused, setIsFocused] = useState(false);
@@ -54,6 +54,7 @@ import React, {
             onBlur={handleInputBlur}
             defaultValue={defaultValue}
             ref={inputRef}
+            value={value}
             {...rest} 
             />
 

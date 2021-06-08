@@ -1,6 +1,7 @@
 {
   "name": "dtmoney",
   "version": "0.1.0",
+  "proxy": "https://apparty-api-owners.herokuapp.com",
   "private": true,
   "dependencies": {
     "@unform/core": "^2.1.6",
