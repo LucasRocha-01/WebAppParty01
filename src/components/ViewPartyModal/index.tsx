@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 
 import CloseImg from '../../assets/images/close.svg';
-import { useParties } from '../../hooks/useParties';
+// import { useParties } from '../../hooks/useParties';
 
 import { Container } from './styles';
 // import GlobalStyle from '../../styles/globalStyles'
@@ -19,7 +19,7 @@ interface filteredPartyProps {
 
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {title}: filteredPartyProps) {
 
-    const {parties} = useParties()
+    // const {parties} = useParties()
 
     return (
         <Modal 

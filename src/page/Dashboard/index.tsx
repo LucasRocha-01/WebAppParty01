@@ -16,12 +16,14 @@ import { useParties } from "../../hooks/useParties";
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface DashboardProps {
-    onOpenNewPartyModal: () => void;
-    onOpenViewPartyModal: () => void;
-}
+// interface DashboardProps {
+//     onOpenNewPartyModal: () => void;
+//     onOpenViewPartyModal: () => void;
+// }
 
-export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps) {
+export default function Dashboard(
+    // {onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps
+    ) {
     const {parties} = useParties()
     
     return(
@@ -52,7 +54,9 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
                             {parties.map(party => (
                                     <li key={party.id} >  
                                         <ContainerBP>
-                                            <ContentBP onClick={() => onOpenViewPartyModal()}>
+                                            <ContentBP 
+                                                // onClick={() => onOpenViewPartyModal()}
+                                                >
                                                 <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
                                                 <span>{party.name}</span>
 
@@ -68,7 +72,7 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
                     </div>
                     <div>
                         <Button 
-                            onClick={onOpenNewPartyModal}
+                            // onClick={onOpenNewPartyModal}
                         >
                         Nova Festa
                         </Button>
