@@ -45,8 +45,11 @@ export function PartiesProvider({children}: PartiesProviderProps) {
 
     useEffect(() => {
         api.get('/owner')
-        .then(response => setParties(response.data.parties))
+        .then(response => setParties(response.data.parties.data))
     }, []);
+
+    console.log(setParties);
+    
 
     async function createParty(partyInput: PartyInput) {
         

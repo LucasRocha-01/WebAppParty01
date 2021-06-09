@@ -138,6 +138,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     value={description}
                     onChange={event => setDescription(event.target.value)}
                     className="description"
+                    
                 />
 
                 <input placeholder="Slug da Festa"

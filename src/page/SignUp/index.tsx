@@ -36,7 +36,7 @@ export default function SignUp() {
         console.log(obj);
         
 
-        api.post('/signup', obj).then((response) => {
+        api.post('owner-guest/signup', obj).then((response) => {
             console.log(response);
           }, (error) => {
             console.log(error);
@@ -72,7 +72,7 @@ export default function SignUp() {
                             Entrar
                         </Button>
 
-                        <a href="forgot">Esqueci minha senha</a>
+                        {/* <a href="forgot">Esqueci minha senha</a> */}
                     </Form>
 
                     <Link to="/">

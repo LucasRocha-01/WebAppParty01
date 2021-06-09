@@ -72,7 +72,7 @@ export default function SignIn() {
                         {/* <Link to="/dashboard">
                         </Link> */}
 
-                    <a href="forgot">Esqueci minha senha</a>
+                    {/* <a href="forgot">Esqueci minha senha</a> */}
                     </Form>
 
                     <Link to="SignUp">
