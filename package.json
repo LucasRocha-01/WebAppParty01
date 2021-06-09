@@ -1,5 +1,5 @@
 {
-  "name": "dtmoney",
+  "name": "appparty",
   "version": "0.1.0",
   "proxy": "https://apparty-api-owners.herokuapp.com",
   "private": true,
@@ -7,7 +7,6 @@
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "axios": "^0.21.1",
-    "miragejs": "^0.1.41",
     "polished": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

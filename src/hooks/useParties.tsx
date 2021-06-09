@@ -2,12 +2,27 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import api from '../services/api';
 
 interface Party {
-    id: number;
-    title: string;
-    date: string;
-    description: string;
-    category: string;
-    createdAt: string;
+    id: number,   
+    name: string,
+    description: string,
+    party_slug: string,
+    type_event: string,
+    address: string,
+    zipcode: string,
+    number: string,
+    district: string,
+    city: string,
+    state: string,
+    tel: string,
+    ticket_link: string,
+    banner_link: string,
+    tutorial_video_link: string,
+    point_of_reference: string,
+    presences: string,
+    theme: string,
+    atractions: string,
+    date_init: number,
+    date_close: number,
 }
 
 type PartyInput = Omit<Party, 'id' | 'createdAt' >;
@@ -18,9 +33,7 @@ interface PartiesProviderProps {
 
 interface PartiesContextData {
     parties: Party[];
-    idParty: string;
     createParty: (party: PartyInput) => Promise<void>;
-    setIdParty: (idParty: string) => void;
 }
 
 export const PartiesContext = createContext<PartiesContextData>(
@@ -29,16 +42,15 @@ export const PartiesContext = createContext<PartiesContextData>(
 
 export function PartiesProvider({children}: PartiesProviderProps) {
     const [parties, setParties] = useState<Party[]>([]);
-    const [idParty, setIdParty] = useState<string>('');
 
     useEffect(() => {
-        api.get('parties')
+        api.get('/owner')
         .then(response => setParties(response.data.parties))
     }, []);
 
     async function createParty(partyInput: PartyInput) {
         
-        const response = await api.post('/parties', {
+        const response = await api.post('/owner/party/add', {
             ...partyInput, 
             createdAt: new Date(),
         })
@@ -49,7 +61,7 @@ export function PartiesProvider({children}: PartiesProviderProps) {
     }
 
     return (
-        <PartiesContext.Provider value={{parties, createParty, idParty, setIdParty}}>
+        <PartiesContext.Provider value={{parties, createParty}}>
             {children}
         </PartiesContext.Provider>
     )    

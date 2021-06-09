@@ -61,6 +61,18 @@ export const AnimationContainer = styled.div`
           color: ${shade(0.2, '#f4ede8')}; 
         }
       }
+
+      span {
+
+          margin-top: 1rem;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        input {
+          margin-right: 1rem;
+        }
+      }
     }
 
     > a {

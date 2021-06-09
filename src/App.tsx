@@ -39,10 +39,10 @@ export function App() {
             <PartiesProvider>
                 <Routes />
                 <GlobalStyle />
-                {/* <Dashboard 
+                <Dashboard 
                     onOpenNewPartyModal ={handleOpenNewPartyModal} 
                     onOpenViewPartyModal={handleOpenViewPartyModal} 
-                /> */}
+                />
 
                 <NewPartyModal 
                     isOpen={isNewPartyModalOpen}

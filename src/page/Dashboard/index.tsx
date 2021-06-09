@@ -22,7 +22,7 @@ interface DashboardProps {
 }
 
 export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps) {
-    const {parties, setIdParty} = useParties()
+    const {parties} = useParties()
     
     return(
         <>
@@ -51,16 +51,14 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
                         <BoxContent> 
                             {parties.map(party => (
                                     <li key={party.id} >  
-                                        <ContainerBP 
-                                            onClick={() => setIdParty(String(party.id))}
-                                        >
+                                        <ContainerBP>
                                             <ContentBP onClick={() => onOpenViewPartyModal()}>
                                                 <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
-                                                <span>{party.title}</span>
+                                                <span>{party.name}</span>
 
                                                 <img alt="relogio" className="hourClock" src={horaImg} />
                                                 <p> {new Intl.DateTimeFormat('pt-BR').format(
-                                                        new Date(party.date))} </p>
+                                                        new Date(party.date_init))} </p>
                                             </ContentBP> 
                                         </ContainerBP> 
                                     </li>      

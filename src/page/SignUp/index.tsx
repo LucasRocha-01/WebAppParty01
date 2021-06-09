@@ -1,9 +1,11 @@
 import React, {useRef, useState} from "react";
-import { FiMail, FiLock, FiUser, FiLogIn, FiArrowLeft } from 'react-icons/fi';
+import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link,
+    //  useHistory 
+    } from 'react-router-dom';
 
 import api from '../../services/api';
 
@@ -19,6 +21,7 @@ export default function SignUp() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [birthdate, setBirthdate] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
     function handleSubmit() { 
@@ -27,7 +30,7 @@ export default function SignUp() {
             email,
             password,
             password_confirmation: passwordConfirmation,
-            birthdate: "1997/11/18",
+            birthdate,
         }
 
         console.log(obj);
@@ -38,6 +41,13 @@ export default function SignUp() {
           }, (error) => {
             console.log(error);
           });
+
+        // setName('');
+        // setEmail('');
+        // setPassword('');
+        // setPasswordConfirmation('');
+        // setBirthdate('');
+
     }
     return(
         <Container>
@@ -54,6 +64,7 @@ export default function SignUp() {
                         <Input name="email" icon={FiMail} placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}/>
                         <Input name="password" icon={FiLock} type="password" placeholder="Digite sua Senha" onChange={(e) => setPassword(e.target.value)}/>
                         <Input name="password" icon={FiLock} type="password" placeholder="Repita a Senha" onChange={(e) => setPasswordConfirmation(e.target.value)}/>
+                        <Input name="birthdate" icon={FiLock} type="date" placeholder="Data de Aniversario" onChange={(e) => setBirthdate(e.target.value)}/>
 
                         {/* <Link to="/dashboard" >
                         </Link> */}

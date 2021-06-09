@@ -19,15 +19,7 @@ interface filteredPartyProps {
 
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {title}: filteredPartyProps) {
 
-    const {parties, idParty} = useParties()
-
-    const NumIdParty = idParty
-
-    const filteredParty = parties.filter(party => party.id.toString() === NumIdParty)
-
-    console.log('id: ' + idParty);
-    console.log(filteredParty);
-
+    const {parties} = useParties()
 
     return (
         <Modal 

@@ -17,11 +17,12 @@ export default function SignIn() {
     const formRef = useRef<FormHandles>(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [remember, setRemember] = useState('');
 
     function handleSubmit() {
         console.log('teste')
 
-        api.post('/login', {email, password, remember: true}).then((response) => {
+        api.post('owner-guest/login', {email, password, remember}).then((response) => {
             console.log(response);
         }, (error) => {
             console.log(error);
@@ -38,9 +39,14 @@ export default function SignIn() {
                     <Form ref={formRef} onSubmit={handleSubmit}>
                         <h1>Faça o seu login</h1>
                         
-                        <Input name="email" icon={FiMail} placeholder="E-mail" value={email}                             
-                        onChange={(e) => setEmail(e.target.value)}
-/>
+                        <Input 
+                            name="email" 
+                            icon={FiMail} 
+                            placeholder="E-mail" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        
                         <Input 
                             name="password" 
                             icon={FiLock} 
@@ -49,6 +55,16 @@ export default function SignIn() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <span>
+                            <input 
+                                name="remember"
+                                type="checkbox" 
+                                value={remember}
+                                onChange={(e) => setRemember(e.target.value)}
+                            />
+                            Lembrar essa senha 
+                        </span>
+                        
                         
                         <Button name="submit" type="submit" >
                             Entrar
