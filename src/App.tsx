@@ -44,10 +44,10 @@ export function App() {
                     onOpenViewPartyModal={handleOpenViewPartyModal} 
                 />
 
-                <NewPartyModal 
+                {/* <NewPartyModal 
                     isOpen={isNewPartyModalOpen}
                     onRequestClose={handleClosedNewPartyModal}
-                />
+                /> */}
 
                 <ViewPartyModal 
                     isOpen={isViewPartyModalOpen}
