@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { NewPartyModal } from '../../components/NewPartyModal';
+import { ViewPartyModal } from '../../components/ViewPartyModal';
 
 import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
 import { Button } from "../../styles/globalStyles"
@@ -35,7 +36,16 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
         setIsNewPartyModalOpen(false);
     }
 
-    console.log(onOpenNewPartyModal);
+    
+    const [isViewPartyModalOpen, setIsViewPartyModalOpen] = useState(false);
+
+    function handleOpenViewPartyModal() {
+        setIsViewPartyModalOpen(true);
+    }
+
+    function handleClosedViewPartyModal() {
+        setIsViewPartyModalOpen(false);
+    }
     
     
     return(
@@ -67,14 +77,15 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
                             {parties.map(party => (
                                     <li key={party.id} >  
 
+                                        <div onClick={handleOpenViewPartyModal}>
                                         <BoxParty 
                                             name={party.name}
                                             imgParty={party.banner_link}
                                             date_init={party.date_init}
                                             date_close={party.date_close}
                                             type_event={party.type_event}
-
                                         />
+                                        </div>
                                         
                                     </li>      
                                 )
@@ -97,7 +108,12 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
             <NewPartyModal 
                     isOpen={isNewPartyModalOpen}
                     onRequestClose={handleClosedNewPartyModal}
-                />
+            />
+
+            <ViewPartyModal 
+                isOpen={isViewPartyModalOpen}
+                onRequestClose={handleClosedViewPartyModal}
+            />
         </>
     )
 }

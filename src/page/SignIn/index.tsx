@@ -1,43 +1,73 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useCallback} from "react";
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import { Link } from "react-router-dom";
+
+import { useAuth } from '../../hooks/AuthContext';
 
 import Input from '../../components/Input';
-import Button from '../../components/Button';
+import Button from '../../components/Button'; 
+
+
+import logoImg from "../../assets/images/logo.png";
 
 import { Container, Content, Background, AnimationContainer } from "./styles";
 
-import logoImg from "../../assets/images/logo.png";
-import { Link } from "react-router-dom";
-
 import api from '../../services/api';
+
+interface SignInFormData {
+    email: string;
+    password: string;
+    remember: boolean;
+}
 
 export default function SignIn() {
     const formRef = useRef<FormHandles>(null);
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState('');
 
-    function handleSubmit() {
-        try {
-            api.post('owner-guest/login', {email, password, remember}).then((response) => {
-                console.log(response);
-                
-                const token = response.data.token;
+    const { signIn } = useAuth();
 
-                localStorage.setItem('token', token);
+    
+    
 
-                console.log('token: ' + token);
+    const handleSubmit = useCallback(
+        async (data: SignInFormData) => {
+            try {
                 
-            }, 
-            (error) => {
-                console.log(error);
+            signIn({
+                email: data.email,
+                password: data.password,
+                remember: data.remember,
             });
-        } catch (error) {
+            } catch (error) {
+                
+            }
+        },
+        [signIn]
+    );
+        // try {
+            // api.post('owner-guest/login', {email, password, remember}).then((response) => {
+            //     console.log(response);
+                
+            //     const token = response.data.token;
+
+            //     localStorage.setItem('token', token);
+
+            //     console.log('token: ' + token);
+                
+            // }, 
+            // (error) => {
+            //     console.log(error);
+            // });
+
+        // } catch (error) {
             
-        }
-    } 
+        // }
+    // } 
 
     
 
