@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+
+import { NewPartyModal } from '../../components/NewPartyModal';
+
 import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
 import { Button } from "../../styles/globalStyles"
 
@@ -21,6 +25,18 @@ interface DashboardProps {
 
 export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps) {
     const {parties} = useParties()
+    const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
+
+    function handleOpenNewPartyModal() {
+        setIsNewPartyModalOpen(true);
+    }
+
+    function handleClosedNewPartyModal() {
+        setIsNewPartyModalOpen(false);
+    }
+
+    console.log(onOpenNewPartyModal);
+    
     
     return(
         <>
@@ -67,7 +83,7 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
                     </div>
                     <div>
                         <Button 
-                            onClick={onOpenNewPartyModal}
+                            onClick={handleOpenNewPartyModal}
                         >
                         Nova Festa
                         </Button>
@@ -77,6 +93,11 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
                     </div>
                 </View>
             </Container>
+
+            <NewPartyModal 
+                    isOpen={isNewPartyModalOpen}
+                    onRequestClose={handleClosedNewPartyModal}
+                />
         </>
     )
 }
