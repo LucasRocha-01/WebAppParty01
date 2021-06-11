@@ -8,24 +8,25 @@ const api = axios.create({
     },
 });
 
-// api.interceptors.request.use(
-//     async (config) => {
-//       const routes = [
-//         '/signup',
-//         '/login',
-//       ];
+api.interceptors.request.use(
+    async (config) => {  
+      const routes = [
+        '/signup',
+        '/login',
+        // '/dashboard',
+      ];
   
-//       if (!routes.includes(config.route)) {
-//         const token = localStorage.getItem('token');
+      if (!routes.includes(config.route)) {
+        const token = localStorage.getItem('token');
   
-//         config.headers.authorization = `Bearer ${token}`;
-//         return config;
-//       }
-//     },
-//     (err) => {
-//       Promise.reject(err);
-//     },
-//   );
+        config.headers.authorization = `Bearer ${token}`;
+        return config;
+      }
+    },
+    (err) => {
+      Promise.reject(err); 
+    },
+  );
   
 
 export default api;

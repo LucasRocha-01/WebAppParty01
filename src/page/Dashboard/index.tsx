@@ -10,20 +10,16 @@ import PartyImg from "../../assets/images/party.jpg";
 
 import { HeaderView } from "../../styles/globalStyles";
 
-import { ContainerBP, ContentBP, ImgPartyBP } from "./styles";
-import horaImg from "../../assets/images/hora.svg";
 import { useParties } from "../../hooks/useParties";
-import React from "react";
 import { Link } from "react-router-dom";
+import {BoxParty} from "../../components/BoxParty";
 
-// interface DashboardProps {
-//     onOpenNewPartyModal: () => void;
-//     onOpenViewPartyModal: () => void;
-// }
+interface DashboardProps {
+    onOpenNewPartyModal: () => void;
+    onOpenViewPartyModal: () => void;
+}
 
-export default function Dashboard(
-    // {onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps
-    ) {
+export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps) {
     const {parties} = useParties()
     
     return(
@@ -44,6 +40,7 @@ export default function Dashboard(
                     <div>
                         <h1>Proximo Evento</h1>
                         <NextEvent>
+                            {/* {parties.or} */}
                             <ImgParty style={{backgroundImage: `url(${PartyImg})` }} />
                             <div>
                                 <h1>Color Fest</h1>
@@ -53,18 +50,16 @@ export default function Dashboard(
                         <BoxContent> 
                             {parties.map(party => (
                                     <li key={party.id} >  
-                                        <ContainerBP>
-                                            <ContentBP 
-                                                // onClick={() => onOpenViewPartyModal()}
-                                                >
-                                                <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
-                                                <span>{party.name}</span>
 
-                                                <img alt="relogio" className="hourClock" src={horaImg} />
-                                                <p> {new Intl.DateTimeFormat('pt-BR').format(
-                                                        new Date(party.date_init))} </p>
-                                            </ContentBP> 
-                                        </ContainerBP> 
+                                        <BoxParty 
+                                            name={party.name}
+                                            imgParty={party.banner_link}
+                                            date_init={party.date_init}
+                                            date_close={party.date_close}
+                                            type_event={party.type_event}
+
+                                        />
+                                        
                                     </li>      
                                 )
                             )}    
@@ -72,7 +67,7 @@ export default function Dashboard(
                     </div>
                     <div>
                         <Button 
-                            // onClick={onOpenNewPartyModal}
+                            onClick={onOpenNewPartyModal}
                         >
                         Nova Festa
                         </Button>

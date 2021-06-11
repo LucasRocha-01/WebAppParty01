@@ -21,8 +21,8 @@ interface Party {
     presences: string,
     theme: string,
     atractions: string,
-    date_init: number,
-    date_close: number,
+    date_init: string,
+    date_close: string,
 }
 
 type PartyInput = Omit<Party, 'id' | 'createdAt' >;

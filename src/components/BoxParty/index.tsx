@@ -1,20 +1,28 @@
-import { ContainerBP, ContentBP, ImgPartyBP } from "./styles";
+import { ContainerBP, ContentBP } from "./styles";
 
-import PartyImg from "../../assets/images/party.jpg";
 import horaImg from "../../assets/images/hora.svg";
 
+interface BoxPartyProps {
+    name: string;
+    imgParty: string;
+    date_init: string;
+    date_close: string;
+    type_event: string;
+}
 
-export function BoxParty() {
+export function BoxParty(props: BoxPartyProps) {
     return(
         <li> 
             <ContainerBP>
-                <span>12-03-21</span>
-                <ContentBP>
-                    <ImgPartyBP style={{backgroundImage: `url(${PartyImg})` }} />
-                    <span>Color Party</span>
-
-                    <img className="hourClock" src={horaImg} />
-                    <p> 08:15 </p>
+                <ContentBP >
+                    <section className="grid grid-template-areas">
+                        <div className="item logo" ><img alt={props.name} src={props.imgParty} /></div>
+                        <div className="item nameParty" >{props.name}</div>
+                        <div className="item typeParty" >{props.type_event}</div>
+                        <img className="item hourClock" alt="Hour Clock" src={horaImg} />
+                        <div className="item dateInit" >{props.date_init}</div>                      
+                        <div className="item dateClose" >{props.date_close}</div>
+                    </section>
                 </ContentBP> 
             </ContainerBP> 
         </li>

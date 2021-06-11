@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { shade } from 'polished';
 
 export const Container = styled.div`
     display: flex;
@@ -16,8 +15,9 @@ export const Container = styled.div`
 `;
 
 export const View = styled.div`
+    width: 70%;
     display: grid;
-    grid-template-columns: 2fr 1fr ;
+    grid-template-columns: 3fr 1fr ;
     gap: 90px;
 `;
 
@@ -95,88 +95,3 @@ export const ImgParty = styled.div`
 
 
 
-export const ContainerBP = styled.div`
-
-
-    display: flex;
-    align-items: center;
-
-
-    img{
-        width: 25px;
-        height: 25px;
-    }
-
-    span{
-        width: 100px;
-        color: var(--white);
-    }
-
-`;
-
-export const ContentBP = styled.div`
-
-
-    display: flex;
-    align-items: center;
-
-    width: 100%;
-    height: 88px;
-    padding-left: 20px;
-
-    border-radius: 6px;
-
-    background: var(--shape);
-
-    box-shadow: 2px 2px 10px;
-    transition: background-color 0.2s;
-  
-    &:hover {
-        background: ${shade(0.2, '#3E3B47')};
-    }
-
-    img{
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-    }
-
-    span {
-        margin-left: 20px;
-        color: var(--white);
-    }
-
-    .hourClock {
-        
-        width: 25px;
-        height: 25px;
-
-        margin-left: 225px;
-        margin-right: 20px;
-    }
-
-    p {
-        color: var(--white);
-        margin-right: 20px ;
-    }
-
-    .pencilEdit {
-        
-        width: 25px;
-        height: 25px;
-
-    }
-
-`;
-
-export const ImgPartyBP = styled.div`
-
-    background-size: cover;
-    /* background-repeat: no-repeat; */
-    background-position: top center;
-
-    border-radius: 50px;
-
-    width: 60px;
-    height: 60px;
-`;

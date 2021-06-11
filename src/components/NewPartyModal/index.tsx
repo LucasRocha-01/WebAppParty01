@@ -40,8 +40,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [presences, setPresences] = useState('');
     const [theme, setTheme] = useState('');
     const [atractions, setAtractions] = useState('');
-    const [date_init, setDate_init] = useState(0);
-    const [date_close, setDate_close] = useState(0);
+    const [date_init, setDate_init] = useState('');
+    const [date_close, setDate_close] = useState('');
 
     
 
@@ -100,8 +100,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setPresences('');
         setTheme('');
         setAtractions('');
-        setDate_init(0);
-        setDate_close(0);
+        setDate_init('');
+        setDate_close('');
 
         onRequestClose();
         

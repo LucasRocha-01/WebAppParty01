@@ -20,14 +20,26 @@ export default function SignIn() {
     const [remember, setRemember] = useState('');
 
     function handleSubmit() {
-        console.log('teste')
+        try {
+            api.post('owner-guest/login', {email, password, remember}).then((response) => {
+                console.log(response);
+                
+                const token = response.data.token;
 
-        api.post('owner-guest/login', {email, password, remember}).then((response) => {
-            console.log(response);
-        }, (error) => {
-            console.log(error);
-        });
+                localStorage.setItem('token', token);
+
+                console.log('token: ' + token);
+                
+            }, 
+            (error) => {
+                console.log(error);
+            });
+        } catch (error) {
+            
+        }
     } 
+
+    
 
     return(
         <Container>
