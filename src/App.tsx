@@ -6,7 +6,11 @@ import Modal from 'react-modal';
 import { PartiesProvider } from './hooks/useParties';
 import { GlobalStyle } from './styles/globalStyles';
 
+import React from 'react';
+
+import ToastContainer from './components/ToastContainer';
 import { AuthProvider } from './hooks/AuthContext';
+import AppProvider from './hooks';
 
 Modal.setAppElement('#root')
 
@@ -14,13 +18,13 @@ export function App() {
    
 
     return (
-        <AuthProvider>
-            <Router>
+        <Router>
+            <AppProvider>
                 <PartiesProvider>
                     <Routes />
                     <GlobalStyle />                
                 </PartiesProvider>
-            </Router>
-        </AuthProvider>
+            </AppProvider>
+        </Router>
     )
 }

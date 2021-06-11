@@ -47,9 +47,7 @@ export function PartiesProvider({children}: PartiesProviderProps) {
         api.get('/owner')
         .then(response => setParties(response.data.parties.data))
     }, []);
-
-    console.log(setParties);
-    
+   
 
     async function createParty(partyInput: PartyInput) {
         

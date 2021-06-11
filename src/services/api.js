@@ -17,7 +17,7 @@ api.interceptors.request.use(
       ];
   
       if (!routes.includes(config.route)) {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('@AppParty:token');
   
         config.headers.authorization = `Bearer ${token}`;
         return config;

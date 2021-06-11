@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useRef} from "react";
 import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -40,10 +40,14 @@ export default function SignUp() {
                 abortEarly: false,
               });
         } catch (err) {
-            
-            const errors = getValidationErrors(err);
-            formRef.current?.setErrors(errors);
-            
+            if (err instanceof Yup.ValidationError) {
+                const errors = getValidationErrors(err);
+
+                formRef.current?.setErrors(errors);
+            }
+
+            //dispara tast
+             
         }
     },[]);
         

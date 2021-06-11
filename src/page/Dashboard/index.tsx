@@ -24,7 +24,7 @@ interface DashboardProps {
     onOpenViewPartyModal: () => void;
 }
 
-export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: DashboardProps) {
+ const Dashboard: React.FC = () => {
     const {parties} = useParties()
     const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
 
@@ -117,4 +117,4 @@ export default function Dashboard({onOpenNewPartyModal, onOpenViewPartyModal}: D
         </>
     )
 }
-
+export default Dashboard;

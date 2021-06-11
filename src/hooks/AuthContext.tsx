@@ -36,7 +36,7 @@ export const AuthProvider: React.FC = ({ children }) => {
             remember,
         });
 
-        const {token} = response.data;
+        const {token} = response.data;        
 
         localStorage.setItem('@AppParty:token', token);
         
@@ -45,6 +45,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     const signOut = useCallback(() =>{
         localStorage.removeItem('@AppParty:token')
+
+        setData({} as AuthState)
     },[])
 
     return (
