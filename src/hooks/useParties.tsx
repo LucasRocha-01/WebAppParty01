@@ -54,8 +54,12 @@ export function PartiesProvider({children}: PartiesProviderProps) {
 
     
     useEffect(() => {
-        api.get('/owner')
-        .then(response => setParties(response.data.parties.data))
+        async function getToken() {
+            const {data} = await api.get('/owner');
+            setParties(data.parties.data)
+        }
+
+        getToken();
     }, []);
     
     
