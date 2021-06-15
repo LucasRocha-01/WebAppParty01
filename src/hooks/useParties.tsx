@@ -70,9 +70,11 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             createdAt: new Date(),
         })
         
-        const { party } = response.data;
-        
-        setParties([...parties, party ]);
+        if (response.status === 200) {
+            const {data} = await api.get('/owner');
+            
+            setParties(data.parties.data)
+        }        
     }
     
     async function removeParty({ slugView }: PartiesRemove) {
