@@ -10,10 +10,20 @@ interface SignInCredentials {
     password: string;
     remember: boolean;
 }
+
+interface SignUpCredentials {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+    birthdate: string;
+    remember: boolean;
+}
 interface AuthContextData {
     data: object;
     signIn(credentials: SignInCredentials): Promise<void>;
     signOut(): void;
+    signUp(credentials: SignUpCredentials): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -43,6 +53,24 @@ export const AuthProvider: React.FC = ({ children }) => {
         setData({token})
     },[])
 
+    const signUp = useCallback(async({ name, password, password_confirmation, birthdate, remember}) => {
+        const response = await api.post('owner-guest/signup', {
+            name,
+            password,
+            password_confirmation,
+            birthdate,
+            remember,
+        });
+
+        const {token} = response.data;
+
+        localStorage.setItem('@AppParty:token', token);
+
+        setData({token})
+
+        
+    },[])
+
     const signOut = useCallback(() =>{
         localStorage.removeItem('@AppParty:token')
 
@@ -50,7 +78,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     },[])
 
     return (
-        <AuthContext.Provider value={{ data: data, signIn, signOut}}>
+        <AuthContext.Provider value={{ data: data, signIn, signOut, signUp}}>
             {children}
         </AuthContext.Provider>
     );

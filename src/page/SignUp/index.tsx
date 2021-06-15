@@ -2,7 +2,9 @@ import React, {useCallback, useRef} from "react";
 import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from "../../assets/images/logo.png";
@@ -10,19 +12,26 @@ import logoImg from "../../assets/images/logo.png";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Link } from 'react-router-dom';
-
-import api from '../../services/api';
 
 import { Container, Content, Background, AnimationContainer } from "./styles";
+import { useAuth } from "../../hooks/AuthContext";
+
+interface SignUpFormData {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+    birthdate: string;
+    remember: boolean;
+}
 
 export default function SignUp() {
     const formRef = useRef<FormHandles>(null);
   
-    const handleSubmit = useCallback(
-        async (data: object) => { 
-        
+    const { signUp } = useAuth();
 
+    const handleSubmit = useCallback(
+        async (data: SignUpFormData) => { 
         try {
             formRef.current?.setErrors({});
 
@@ -36,20 +45,32 @@ export default function SignUp() {
                 // birthdate: Yup.number().required('Data de Nascimento obrigatório'),
             });
 
-            await schema.validate(data, {
-                abortEarly: false,
-              });
+            await schema.validate(data, { abortEarly: false, });
+
+            await signUp({
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                passwordConfirmation: data.passwordConfirmation,
+                birthdate: data.birthdate,
+                remember: data.remember,
+            });
+
+            console.log(data);
+
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
                 const errors = getValidationErrors(err);
 
                 formRef.current?.setErrors(errors);
+
+                return;
             }
 
             //dispara tast
              
         }
-    },[]);
+    },[signUp]);
         
 
         // api.post('owner-guest/signup', obj).then((response) => {
@@ -73,8 +94,8 @@ export default function SignUp() {
                         <Input name="name" icon={FiUser} placeholder="Nome" />
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
                         <Input name="password" icon={FiLock} type="password" placeholder="Digite sua Senha" />
-                        {/* <Input name="passwordConfirmation" icon={FiLock} type="password" placeholder="Repita a Senha" />
-                        <Input name="birthdate" icon={FiLock} type="date" placeholder="Data de Aniversario" /> */}
+                        <Input name="passwordConfirmation" icon={FiLock} type="password" placeholder="Repita a Senha" />
+                        <Input name="birthdate" icon={FiLock} type="date" placeholder="Data de Aniversario" />
 
                         {/* <Link to="/dashboard" >
                         </Link> */}

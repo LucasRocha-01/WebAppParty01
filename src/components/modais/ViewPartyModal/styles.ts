@@ -1,6 +1,26 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+
+    /* .menuView {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+
+            display: flex;
+        } */
+    
+        overflow: scroll;
+        height: 80vh;
+
+    div {
+        img {
+            width: 100%;
+            border-radius: 0.5rem;
+            padding-bottom: 3rem;
+        }
+    }
+
     h2 {
         color: var(--text-title);
         font-size: 1.5rem;
@@ -28,7 +48,8 @@ export const Container = styled.div`
             }
         }
 
-        button[type="submit"] {
+        div {
+            button {
                 width: 100%;
                 padding: 0 1.5rem;
                 height: 4rem;
@@ -47,4 +68,13 @@ export const Container = styled.div`
                     filter: brightness(0.9)
                 }
             }
+        }
+
+        span {
+            font-size : 1rem;
+            color: var(--text-)
+        }
+
+
+
 `;

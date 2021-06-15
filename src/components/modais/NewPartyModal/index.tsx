@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
-import CloseImg from '../../assets/images/close.svg';
-import { useParties } from '../../hooks/useParties';
+import CloseImg from '../../../assets/images/close.svg';
+import { useParties } from '../../../hooks/useParties';
 
 import { Container } from './styles';
 // import GlobalStyle from '../../styles/globalStyles'
@@ -49,10 +49,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         event.preventDefault();
 
         await createParty({
-            // title,
-            // date,
-            // description,
-            // category
    
             name,
             description,
@@ -75,12 +71,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             date_init,
             date_close,
         })
-
-
-        // setTitle('');
-        // setDescription('');
-        // setCategory('');
-        // setDate('');
 
         setName('');
         setDescription('');
@@ -146,52 +136,62 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     onChange={event => setParty_slug(event.target.value)}
                 />
 
-                <select placeholder="Tipo do Evento"
-                    value={type_event}
-                    onChange={event => setType_event(event.target.value)}
-                    className="event"
-                >
-                    <option value="fantasia">Fantasia</option>
-                    <option value="Paint">Paint</option>
-                    <option value="BaileFunk">Baile Funk</option>
-                </select>
+                <div className="col-6">
+                    <input placeholder="Endereço"
+                        value={address}
+                        onChange={event => setAddress(event.target.value)}
+                    />
 
-                <input placeholder="Endereço"
-                    value={address}
-                    onChange={event => setAddress(event.target.value)}
-                />
+                    <input placeholder="CEP"
+                        value={zipcode}
+                        onChange={event => setZipcode(event.target.value)}
+                        className="zipCode"
+                    />
 
-                <input placeholder="CEP"
-                    value={zipcode}
-                    onChange={event => setZipcode(event.target.value)}
-                    className="zipCode"
-                />
+                    <input placeholder="Número"
+                        value={number}
+                        onChange={event => setNumber(event.target.value)}
+                        className="numberCode"
+                    />
+                        
+                    <input placeholder="Ponto de Referencia"
+                        value={point_of_reference}
+                        onChange={event => setPoint_of_reference(event.target.value)}
+                    />
 
-                <input placeholder="Número"
-                    value={number}
-                    onChange={event => setNumber(event.target.value)}
-                    className="numberCode"
-                />
+                    <label>
+                        <p>Evento LGBTQIA+?</p>
+                        <input
+                            type="checkbox" 
+                            value={type_event}
+                            onChange={event => setType_event(event.target.value)}
+                        />
+                    </label>
+                </div>
 
-                <input placeholder="Distrito"
-                    value={district}
-                    onChange={event => setDistrict(event.target.value)}
-                />
+                <div className="col-6">
+                    <input placeholder="Distrito"
+                        value={district}
+                        onChange={event => setDistrict(event.target.value)}
+                    />
 
-                <input placeholder="Cidade"
-                    value={city}
-                    onChange={event => setCity(event.target.value)}
-                />
+                    <input placeholder="Cidade"
+                        value={city}
+                        onChange={event => setCity(event.target.value)}
+                    />
 
-                <input placeholder="Estado"
-                    value={state}
-                    onChange={event => setState(event.target.value)}
-                />
+                    <input placeholder="Estado"
+                        value={state}
+                        onChange={event => setState(event.target.value)}
+                    />
 
-                <input placeholder="Telefone"
-                    value={tel}
-                    onChange={event => setTel(event.target.value)}
-                />
+                    <input placeholder="Telefone"
+                        value={tel}
+                        onChange={event => setTel(event.target.value)}
+                    />
+                </div>
+
+                
 
                 <input placeholder="Link de venda de Tickets"
                     value={ticket_link}
@@ -206,11 +206,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 <input placeholder="Tutorial Video Link"
                     value={tutorial_video_link}
                     onChange={event => setTutorial_video_link(event.target.value)}
-                />
-
-                <input placeholder="Ponto de Referencia"
-                    value={point_of_reference}
-                    onChange={event => setPoint_of_reference(event.target.value)}
                 />
 
                 <input placeholder="Presenças"
@@ -228,17 +223,32 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     onChange={event => setAtractions(event.target.value)}
                 />
 
-                {/* <input placeholder="Data de Início"
-                    value={date_init}
-                    type="datetime-local"
-                    onChange={event => setDate_init(event.target.value)}
-                />
+                <label
+                    className="dataHour"
+                > Termino do Evento:
+                    <input 
+                        className="dataHour"
+                        placeholder="Data de Início"
+                        value={date_init}
+                        type="datetime-local"
+                        onChange={event => setDate_init(event.target.value)}
+                    />
+                </label>
 
-                <input placeholder="Data de Término"
-                    value={date_close}
-                    type="datetime-local"
-                    onChange={event => setDate_close(event.target.value)}
-                /> */}
+                <label
+                    className="dataHour"
+                > Termino do Evento:
+                    <input  
+                        className="dataHour"
+                        placeholder="Data de Término"
+                        value={date_close}
+                        type="datetime-local"
+                        onChange={event => setDate_close(event.target.value)}
+                    />
+                </label>
+                
+
+                
 
                 <button type="submit">
                     Cadastrar

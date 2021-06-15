@@ -13,7 +13,6 @@ api.interceptors.request.use(
       const routes = [
         '/signup',
         '/login',
-        // '/dashboard',
       ];
   
       if (!routes.includes(config.route)) {

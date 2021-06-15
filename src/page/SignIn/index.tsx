@@ -2,29 +2,28 @@ import React, {useRef, useCallback} from "react";
 import { FiMail, FiLock, FiLogIn } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { Link } from "react-router-dom";
 import * as Yup from 'yup';
+import { Link } from "react-router-dom";
 
-import { useAuth } from '../../hooks/AuthContext';
-import { useToast } from '../../hooks/toast';
 import getValidationErrors from "../../utils/getValidationErrors";
 
+import logoImg from "../../assets/images/logo.png";
 
 import Input from '../../components/Input';
 import Button from '../../components/Button'; 
 
-
-import logoImg from "../../assets/images/logo.png";
+import { useAuth } from '../../hooks/AuthContext';
+import { useToast } from '../../hooks/toast';
 
 import { Container, Content, Background, AnimationContainer } from "./styles";
-
-import api from '../../services/api';
 
 interface SignInFormData {
     email: string;
     password: string;
     remember: boolean;
 }
+
+
 
 const SignIn: React.FC = () => {
     const formRef = useRef<FormHandles>(null);

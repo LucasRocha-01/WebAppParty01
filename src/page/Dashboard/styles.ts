@@ -7,18 +7,12 @@ export const Container = styled.div`
     margin-top: 30px;
 
     h1{
+        margin-top: 30px;
         color: var(--white);
 
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
-`;
-
-export const View = styled.div`
-    width: 70%;
-    display: grid;
-    grid-template-columns: 3fr 1fr ;
-    gap: 90px;
 `;
 
 export const BoxContent = styled.div`
@@ -34,10 +28,6 @@ export const BoxContent = styled.div`
             margin-top: 15px;
         }
     }
-`;
-
-export const BoxCalendar = styled.div`
-
 `;
 
 export const NextEvent = styled.div`
@@ -63,18 +53,14 @@ export const NextEvent = styled.div`
 `;
 
 export const Anuncio = styled.div`
+
+    img {
+        width: 100%;
+        box-shadow: 2px 2px 10px;
+        border-radius: 6px;
+    }
     
     margin-top: 50px;
-
-    background: var(--shape);
-
-    width: 100%;
-    height: 340px;
-
-    box-shadow: 2px 2px 10px;
-
-    border-radius: 6px;
-
     margin-bottom: 50px;
 `;
 

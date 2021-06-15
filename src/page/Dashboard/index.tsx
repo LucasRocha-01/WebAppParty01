@@ -1,72 +1,81 @@
 import React, { useState } from 'react';
 
-import { NewPartyModal } from '../../components/NewPartyModal';
-import { ViewPartyModal } from '../../components/ViewPartyModal';
-
-import { Container, BoxContent, View, NextEvent, Anuncio, ImgParty } from "./styles";
-import { Button } from "../../styles/globalStyles"
-
-// import { Link } from 'react-router-dom';
-
-import logoImg from "../../assets/images/logo.png";
-import outButtomImg from "../../assets/images/outButton.svg";
-
-import PartyImg from "../../assets/images/party.jpg";
-
-import { HeaderView } from "../../styles/globalStyles";
+import { NewPartyModal } from '../../components/modais/NewPartyModal';
+import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
 
 import { useParties } from "../../hooks/useParties";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/AuthContext";
+import { useUsers } from '../../hooks/useUser';
+
+import { Container, BoxContent, NextEvent, Anuncio, ImgParty } from "./styles";
 import {BoxParty} from "../../components/BoxParty";
 
-interface DashboardProps {
-    onOpenNewPartyModal: () => void;
-    onOpenViewPartyModal: () => void;
-}
+import logoImg from "../../assets/images/logo.png";
+import PartyImg from "../../assets/images/party.jpg";
+import AnuncioImg from "../../assets/images/Banner-vertical.gif";
+
+import { HeaderView } from "../../styles/globalStyles";
+import { Button } from "../../styles/globalStyles"
+
+import { FiPower } from 'react-icons/fi';
+
+// interface DashboardProps {
+//     onOpenNewPartyModal: () => void;
+//     onOpenViewPartyModal: () => void;
+// }
 
  const Dashboard: React.FC = () => {
-    const {parties} = useParties()
+    const {parties, setSlugView} = useParties()
+    const { users } = useUsers();
+
     const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
 
-    function handleOpenNewPartyModal() {
-        setIsNewPartyModalOpen(true);
-    }
+    const { signOut } = useAuth();
 
-    function handleClosedNewPartyModal() {
-        setIsNewPartyModalOpen(false);
-    }
+    function handleSignOut() { signOut(); }
 
+    function handleOpenNewPartyModal() {setIsNewPartyModalOpen(true);}
+    function handleClosedNewPartyModal() {setIsNewPartyModalOpen(false);}
     
     const [isViewPartyModalOpen, setIsViewPartyModalOpen] = useState(false);
 
-    function handleOpenViewPartyModal() {
-        setIsViewPartyModalOpen(true);
-    }
+    function handleOpenViewPartyModal() {setIsViewPartyModalOpen(true);}
+    function handleClosedViewPartyModal() {setIsViewPartyModalOpen(false);}
 
-    function handleClosedViewPartyModal() {
-        setIsViewPartyModalOpen(false);
-    }
-    
-    
+    console.log(users);
+
     return(
         <>
             <HeaderView>    
                 <div>
                     <img alt="test" className="logo" src={logoImg}/>
                     
-                    <Link to="/">
-                        <img alt="test" className="outButtom" src={outButtomImg} />
-                    </Link>
-                </div>            
+                    
+
+                    <button onClick={handleSignOut} >
+                        
+
+                        <FiPower />
+                    </button>
+                </div>  
+                {/* {users.map(user => (
+                    <li key={user.id}>
+                        <p>{user.name}</p>
+                    </li>
+                ))}      */}
+
+
+                
             </HeaderView>
             <Container>
                 
-                <View>
 
-                    <div>
+
+                    <div className="col-6">
                         <h1>Proximo Evento</h1>
                         <NextEvent>
-                            {/* {parties.or} */}
+                            {/* {parties.filter(party => {party.date_init === Math.min(party.date_init) }) } */}
+
                             <ImgParty style={{backgroundImage: `url(${PartyImg})` }} />
                             <div>
                                 <h1>Color Fest</h1>
@@ -74,17 +83,22 @@ interface DashboardProps {
                         </NextEvent>
 
                         <BoxContent> 
-                            {parties.map(party => (
+
+                            {parties
+                            // .filter( party => party.owner_id === users  )
+                            .map(party => (
                                     <li key={party.id} >  
 
-                                        <div onClick={handleOpenViewPartyModal}>
-                                        <BoxParty 
+                                        <div onClick={() => setSlugView(party.party_slug)}>
+                                            <div onClick={handleOpenViewPartyModal}>
+                                        <BoxParty
                                             name={party.name}
                                             imgParty={party.banner_link}
                                             date_init={party.date_init}
                                             date_close={party.date_close}
                                             type_event={party.type_event}
                                         />
+                                            </div>
                                         </div>
                                         
                                     </li>      
@@ -92,28 +106,21 @@ interface DashboardProps {
                             )}    
                         </BoxContent>
                     </div>
-                    <div>
+                    <div className="col-2">
                         <Button 
                             onClick={handleOpenNewPartyModal}
                         >
                         Nova Festa
                         </Button>
-                        <Anuncio>
-                            <h1>Anúncios01</h1>
+                        <Anuncio >
+                            <img src={AnuncioImg} alt="anuncio" />
                         </Anuncio>
                     </div>
-                </View>
+
             </Container>
 
-            <NewPartyModal 
-                    isOpen={isNewPartyModalOpen}
-                    onRequestClose={handleClosedNewPartyModal}
-            />
-
-            <ViewPartyModal 
-                isOpen={isViewPartyModalOpen}
-                onRequestClose={handleClosedViewPartyModal}
-            />
+            <NewPartyModal  isOpen={isNewPartyModalOpen}    onRequestClose={handleClosedNewPartyModal} />
+            <ViewPartyModal isOpen={isViewPartyModalOpen}   onRequestClose={handleClosedViewPartyModal} />
         </>
     )
 }
