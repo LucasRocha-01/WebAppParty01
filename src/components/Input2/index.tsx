@@ -21,6 +21,7 @@ const Input: React.FC<InputProps> = ({
   name,
   containerStyle = {},
   icon: Icon,
+  value,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -60,6 +61,7 @@ const Input: React.FC<InputProps> = ({
         onBlur={handleInputBlur}
         defaultValue={defaultValue}
         ref={inputRef}
+        value={value}
         {...rest}
         // type="text"
       />

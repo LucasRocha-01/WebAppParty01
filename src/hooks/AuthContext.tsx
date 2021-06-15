@@ -15,10 +15,11 @@ interface SignUpCredentials {
     name: string;
     email: string;
     password: string;
-    passwordConfirmation: string;
+    password_confirmation: string;
     birthdate: string;
     remember: boolean;
 }
+
 interface AuthContextData {
     data: object;
     signIn(credentials: SignInCredentials): Promise<void>;
@@ -53,9 +54,10 @@ export const AuthProvider: React.FC = ({ children }) => {
         setData({token})
     },[])
 
-    const signUp = useCallback(async({ name, password, password_confirmation, birthdate, remember}) => {
-        const response = await api.post('owner-guest/signup', {
+    const signUp = useCallback(async({ name, email, password, password_confirmation, birthdate, remember}) => {
+        const response = await api.post('/owner-guest/signup', {
             name,
+            email,
             password,
             password_confirmation,
             birthdate,

@@ -1,5 +1,5 @@
 import React, {useCallback, useRef} from "react";
-import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
+import { FiMail, FiLock, FiUser, FiArrowLeft, FiCalendar } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link } from 'react-router-dom';
@@ -15,20 +15,22 @@ import Button from '../../components/Button';
 
 import { Container, Content, Background, AnimationContainer } from "./styles";
 import { useAuth } from "../../hooks/AuthContext";
+import { useToast } from "../../hooks/toast";
 
 interface SignUpFormData {
     name: string;
     email: string;
     password: string;
-    passwordConfirmation: string;
+    password_confirmation: string;
     birthdate: string;
     remember: boolean;
 }
 
-export default function SignUp() {
+const SignUp: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
   
     const { signUp } = useAuth();
+    const {addToast} = useToast();
 
     const handleSubmit = useCallback(
         async (data: SignUpFormData) => { 
@@ -41,9 +43,10 @@ export default function SignUp() {
                     .required('E-mail obrigatório')
                     .email('Digite um email Válido'),
                 password: Yup.string().min(6, 'No mínimo 6 dígitos'),
-                // passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
-                // birthdate: Yup.number().required('Data de Nascimento obrigatório'),
+                // // passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
+                // // birthdate: Yup.number().required('Data de Nascimento obrigatório'),
             });
+
 
             await schema.validate(data, { abortEarly: false, });
 
@@ -51,9 +54,9 @@ export default function SignUp() {
                 name: data.name,
                 email: data.email,
                 password: data.password,
-                passwordConfirmation: data.passwordConfirmation,
-                birthdate: data.birthdate,
-                remember: data.remember,
+                password_confirmation: data.password,
+                birthdate: "1996/03/02",
+                remember: true,
             });
 
             console.log(data);
@@ -64,13 +67,18 @@ export default function SignUp() {
 
                 formRef.current?.setErrors(errors);
 
+                console.log(data);
                 return;
             }
 
-            //dispara tast
+            addToast({
+                type: 'error',
+                title: 'erro na autenticação',
+                description: 'ocorreu um erro ao fazer login check as credenciais',
+            });
              
         }
-    },[signUp]);
+    },[signUp, addToast]);
         
 
         // api.post('owner-guest/signup', obj).then((response) => {
@@ -90,12 +98,11 @@ export default function SignUp() {
                     <Form ref={formRef} onSubmit={handleSubmit}>
                         <h1>Faça o seu Registro</h1>
                         
-                    
                         <Input name="name" icon={FiUser} placeholder="Nome" />
                         <Input name="email" icon={FiMail} placeholder="E-mail" />
                         <Input name="password" icon={FiLock} type="password" placeholder="Digite sua Senha" />
-                        <Input name="passwordConfirmation" icon={FiLock} type="password" placeholder="Repita a Senha" />
-                        <Input name="birthdate" icon={FiLock} type="date" placeholder="Data de Aniversario" />
+                        <Input name="password_confirmation" icon={FiLock} type="password" placeholder="Repita a Senha" /> 
+                        <Input name="birthdate" icon={FiCalendar} type="date" placeholder="Data de Aniversario" />
 
                         {/* <Link to="/dashboard" >
                         </Link> */}
@@ -117,3 +124,4 @@ export default function SignUp() {
     )
 }
 
+export default SignUp;

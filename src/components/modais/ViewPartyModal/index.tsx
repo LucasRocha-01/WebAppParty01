@@ -20,14 +20,29 @@ interface filteredPartyProps {
     title?: string;
 }
 
-// function handleRemoveParty({slugView}) {
-//     api.post(`/owner/delete/${slugView}`)
-// }
+
 
 
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {title}: filteredPartyProps) {
 
-    const {parties, slugView, removeParty} = useParties()
+    const {parties, slugView} = useParties()
+
+
+    function handleRemoveParty() {
+        console.log('teste')
+
+        const party_slug = slugView;
+
+        api.post(`/owner/delete/${party_slug}`,{party_slug})
+        // .then(() => {onRequestClose})
+        .then((response) => {console.log(response);
+
+        }, (error) => {
+            console.log(error);
+        });
+
+        onRequestClose();
+    }
 
     return (
         <Modal 
@@ -40,7 +55,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
             <div className="react-modalView-menu">
                 <button
                     type="button"
-                    onClick={() => {removeParty({slugView})}}
+                    onClick={handleRemoveParty}
                 >
                     <FiTrash />
                 </button>
@@ -65,7 +80,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
 
                 {parties.filter( party => party.party_slug === slugView ).map( party => (
                     
-                    <div>
+                    <div key={party.party_slug}>
                         <img src={party.banner_link? party.banner_link : imgBanner} alt={party.name} />
                         
 

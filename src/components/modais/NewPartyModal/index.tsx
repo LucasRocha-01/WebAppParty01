@@ -154,19 +154,19 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         className="numberCode"
                     />
                         
-                    <input placeholder="Ponto de Referencia"
-                        value={point_of_reference}
-                        onChange={event => setPoint_of_reference(event.target.value)}
-                    />
-
-                    <label>
-                        <p>Evento LGBTQIA+?</p>
-                        <input
-                            type="checkbox" 
-                            value={type_event}
-                            onChange={event => setType_event(event.target.value)}
+                        <input placeholder="Ponto de Referencia"
+                            value={point_of_reference}
+                            onChange={event => setPoint_of_reference(event.target.value)}
                         />
-                    </label>
+
+                        <label>
+                            <p>Evento LGBTQIA+?</p>
+                            <input
+                                type="checkbox" 
+                                value={type_event}
+                                onChange={event => setType_event(event.target.value)}
+                            />
+                        </label>
                 </div>
 
                 <div className="col-6">

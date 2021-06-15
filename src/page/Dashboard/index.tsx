@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { NewPartyModal } from '../../components/modais/NewPartyModal';
 import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
+// import { NewPartyModalcopy } from '../../components/modais/NewPartyModalcopy';
 
 import { useParties } from "../../hooks/useParties";
 import { useAuth } from "../../hooks/AuthContext";
@@ -121,6 +122,7 @@ import { FiPower } from 'react-icons/fi';
 
             <NewPartyModal  isOpen={isNewPartyModalOpen}    onRequestClose={handleClosedNewPartyModal} />
             <ViewPartyModal isOpen={isViewPartyModalOpen}   onRequestClose={handleClosedViewPartyModal} />
+            {/* <NewPartyModalcopy isOpen={isNewPartyModalOpen}   onRequestClose={handleClosedNewPartyModal} /> */}
         </>
     )
 }

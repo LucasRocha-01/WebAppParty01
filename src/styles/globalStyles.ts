@@ -240,6 +240,11 @@ export const HeaderView = styled.div`
         
         font-size: 25px;
         color: var(--text-light);
+        
+        &:hover {
+        background: ${shade(0.2, 'black')};
+  }
+
     }
 
     div {
