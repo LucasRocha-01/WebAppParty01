@@ -11,9 +11,6 @@ interface BoxPartyProps {
     type_event: string;
 }
 
-    
-
-
 export function BoxParty(props: BoxPartyProps) {
 
 

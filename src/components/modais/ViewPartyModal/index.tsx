@@ -1,11 +1,14 @@
+import { useState } from 'react';
+
 import { FiX, FiTrash } from 'react-icons/fi';
 import { TiPencil } from 'react-icons/ti';
 import Modal from 'react-modal';
 
+import { EditPartyModal } from '../EditPartyModal';
+
 import imgBanner from '../../../assets/images/patternbanner.jpg';
 
 import { useParties } from '../../../hooks/useParties';
-import api from '../../../services/api';
 
 import { Container } from './styles';
 
@@ -25,24 +28,23 @@ interface filteredPartyProps {
 
 export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {title}: filteredPartyProps) {
 
-    const {parties, slugView} = useParties()
+    const {removeParty, parties, slugView} = useParties()
 
-
-    function handleRemoveParty() {
+    const party_slug = slugView;
+        function handleRemoveParty() {
         console.log('teste')
 
-        const party_slug = slugView;
-
-        api.post(`/owner/delete/${party_slug}`,{party_slug})
-        // .then(() => {onRequestClose})
-        .then((response) => {console.log(response);
-
-        }, (error) => {
-            console.log(error);
-        });
+        removeParty(
+            party_slug,
+        )
 
         onRequestClose();
     }
+    const [isEditPartyModalOpen, setIsEditPartyModalOpen] = useState(false);
+
+    function handleOpenEditPartyModal() {setIsEditPartyModalOpen(true);}
+    function handleClosedEditPartyModal() {setIsEditPartyModalOpen(false);}
+    
 
     return (
         <Modal 
@@ -61,6 +63,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                 </button>
                 <button
                     type="button"
+                    onClick={handleOpenEditPartyModal}
                 >
                     <TiPencil />
                 </button>
@@ -155,6 +158,8 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                 ))}
 
             </Container>
+
+            <EditPartyModal  isOpen={isEditPartyModalOpen}    onRequestClose={handleClosedEditPartyModal} />
         </Modal>
     )
 }

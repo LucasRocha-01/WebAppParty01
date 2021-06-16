@@ -18,7 +18,8 @@ export const Container = styled.div`
 export const BoxContent = styled.div`
 
     /* overflow-y: scroll;  */
-    height: 400px ;
+    height: auto ;
+    padding-bottom: 30px;
 
     li{
         

@@ -19,6 +19,7 @@ import { HeaderView } from "../../styles/globalStyles";
 import { Button } from "../../styles/globalStyles"
 
 import { FiPower } from 'react-icons/fi';
+import Footer from '../../components/Footer';
 
 // interface DashboardProps {
 //     onOpenNewPartyModal: () => void;
@@ -29,11 +30,12 @@ import { FiPower } from 'react-icons/fi';
     const {parties, setSlugView} = useParties()
     const { users } = useUsers();
 
-    const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
-
+    
     const { signOut } = useAuth();
-
+    
     function handleSignOut() { signOut(); }
+    
+    const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
 
     function handleOpenNewPartyModal() {setIsNewPartyModalOpen(true);}
     function handleClosedNewPartyModal() {setIsNewPartyModalOpen(false);}
@@ -85,6 +87,7 @@ import { FiPower } from 'react-icons/fi';
 
                         <BoxContent> 
 
+
                             {parties
                             // .filter( party => party.owner_id === users  )
                             .map(party => (
@@ -123,6 +126,8 @@ import { FiPower } from 'react-icons/fi';
             <NewPartyModal  isOpen={isNewPartyModalOpen}    onRequestClose={handleClosedNewPartyModal} />
             <ViewPartyModal isOpen={isViewPartyModalOpen}   onRequestClose={handleClosedViewPartyModal} />
             {/* <NewPartyModalcopy isOpen={isNewPartyModalOpen}   onRequestClose={handleClosedNewPartyModal} /> */}
+
+            <Footer />
         </>
     )
 }

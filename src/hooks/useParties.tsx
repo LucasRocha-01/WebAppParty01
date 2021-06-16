@@ -26,7 +26,9 @@ interface Party {
     date_close: string,
 }
 
+type PartyRemove = Pick<Party, 'party_slug'>;
 type PartyInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' >;
+type PartyEditInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'party_slug' >;
 
 interface PartiesProviderProps {
     children: ReactNode;
@@ -37,12 +39,10 @@ interface PartiesContextData {
     slugView: string,
     createParty: (party: PartyInput ) => Promise<void>;
     setSlugView: (slugView:string   ) => void;
-    removeParty: ({ slugView }: PartiesRemove) => Promise<void>
+    editParty: (party: PartyInput) => Promise<void>;
+    removeParty: any;
 }
 
-interface PartiesRemove {
-    slugView: string;
-}
 
 export const PartiesContext = createContext<PartiesContextData>(
     {} as PartiesContextData
@@ -77,14 +77,36 @@ export function PartiesProvider({children}: PartiesProviderProps) {
         }        
     }
     
-    async function removeParty({ slugView }: PartiesRemove) {
+    
+    async function removeParty(partyRemove: PartyRemove) {
         
-        await api.post(`/owner/delete/${slugView}`)
+        const party_slug = slugView;
+        const response = await api.post(`/owner/delete/${party_slug}`,{party_slug})
         
+        if (response.status === 200) {
+            const {data} = await api.get('/owner');
+            
+            setParties(data.parties.data)
+        }       
     }
     
+    
+    async function editParty(partyEditInput: PartyEditInput) {
+        
+        const response = 
+        await api.post(`/owner/edit/${slugView}`, {
+            ...partyEditInput, 
+        })
+        
+        if (response.status === 200) {
+            const {data} = await api.get(`/owner`);
+            
+            setParties(data.parties.data)
+        }        
+    }
+        
     return (
-        <PartiesContext.Provider value={{parties, createParty, removeParty, slugView, setSlugView}}>
+        <PartiesContext.Provider value={{parties, editParty, removeParty, createParty, slugView, setSlugView}}>
             {children}
         </PartiesContext.Provider>
     )    

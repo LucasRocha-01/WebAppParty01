@@ -22,65 +22,26 @@ export const Container = styled.form`
         margin-bottom: 2rem;
         }
 
-        div {
+    input {
+        width: 100%;
+        padding: 0 1.5rem;
+        height: 4rem;
+        border-radius: 0.25rem;
 
-            background: #e7e9ee;
-            border: 1px solid #d7d7d7;
-            border-radius: 0.25rem;
+        border: 1px solid #d7d7d7;
+        background: #e7e9ee;
 
-            Input {
-            background: transparent;
-            
-            padding: 16px;
-            width: 100%;
+        font-weight: 400;
+        font-size: 1rem;
 
-            color: #666360;
-
-            display: flex;
-            align-items: center;
-
-            & + div {
-                margin-top: 8px;
-            }
-
-            input {
-                flex: 1;
-                background: transparent;
-                border: 0;
-                color: #f4ede8;
-
-                &::placeholder {
-                color: #666360;
-                }
-            }
-
-            svg {
-                margin-right: 16px;
-            }
-
-            /* input {
-                width: 100%;
-                padding: 0 1.5rem;
-                height: 4rem;
-                border-radius: 0.25rem;
-
-                border: 1px solid #d7d7d7;
-                background: #e7e9ee;
-
-                font-weight: 400;
-                font-size: 1rem;
-
-                &::placeholder {
-                    color: var(--text-body)
-                }
-
-                & + input {
-                    margin-top: 1rem;
-                }
-            } */
+        &::placeholder {
+            color: var(--text-body)
         }
+
+        & + input {
+            margin-top: 1rem;
         }
-    
+    }
 
     label {
 
@@ -152,7 +113,7 @@ export const Container = styled.form`
     }
 
 
-    /* .description {
+    .description {
             height: 8rem;
             align-items: flex-start;
     }
@@ -200,9 +161,11 @@ export const Container = styled.form`
     }
 
     div {
-        display: inline; 
+        display: inline;
+
+        
             
-    } */
+    }
 
     button[type="submit"] {
             width: 100%;
