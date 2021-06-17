@@ -39,7 +39,7 @@ interface PartiesContextData {
     slugView: string,
     createParty: (party: PartyInput ) => Promise<void>;
     setSlugView: (slugView:string   ) => void;
-    editParty: (party: PartyInput) => Promise<void>;
+    editParty: (party: PartyEditInput) => Promise<void>;
     removeParty: any;
 }
 

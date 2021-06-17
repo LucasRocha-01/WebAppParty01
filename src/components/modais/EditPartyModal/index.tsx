@@ -28,8 +28,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
     const [name, setName] =                 useState(`${party[0].name}`); //Property 'name' does not exist on type 'Party[]' 
     const [description, setDescription] =   useState(`${party[0].description}`);
-    const [party_slug, setParty_slug] =     useState('');
-    const [type_event, setType_event] =     useState('');
+    const [type_event, setType_event] =     useState(`${party[0].type_event? party[0].type_event : '' }`);
     const [address, setAddress] =           useState(`${party[0].description? party[0].description : '' }`);
     const [zipcode, setZipcode] =           useState(`${party[0].zipcode? party[0].zipcode : '' }`);
     const [number, setNumber] =             useState(`${party[0].number? party[0].number : '' }`);
@@ -54,7 +53,6 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
    
             name,
             description,
-            party_slug,
             type_event,
             address,
             zipcode,
