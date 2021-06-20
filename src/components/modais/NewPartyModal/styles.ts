@@ -8,6 +8,7 @@ export const Container = styled.form`
     padding-right: 2rem;
 
     .col-6 {
+        width: 50%;
         padding-right: 0;
         padding-left: 0;
 
@@ -41,6 +42,8 @@ export const Container = styled.form`
         & + input {
             margin-top: 1rem;
         }
+
+
     }
 
     label {
@@ -61,6 +64,8 @@ export const Container = styled.form`
         input {
             height: 30px;
             flex: 0.5;
+            background: transparent;
+            border: none;
         }
     }
 

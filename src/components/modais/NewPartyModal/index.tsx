@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, ChangeEvent, useCallback } from 'react';
 import Modal from 'react-modal';
 
 import CloseImg from '../../../assets/images/close.svg';
@@ -45,8 +45,18 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
     
 
-    async function handleCreateNewParty(event: FormEvent) {
-        event.preventDefault();
+    const handleChangeBanner = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            if (e.target.files) {
+                console.log(e.target.files[0]);
+                
+               // setBanner_link(e.target.files[0])
+            }
+        },[]
+    );
+
+    async function handleCreateNewParty(event: FormEvent, ) {
+        event.preventDefault(); 
 
         await createParty({
    
@@ -62,7 +72,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             state,
             tel,
             ticket_link,
-            banner_link,
             tutorial_video_link,
             point_of_reference,
             presences,
@@ -70,6 +79,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             atractions,
             date_init,
             date_close,
+
+            // banner_link,
         })
 
         setName('');
@@ -120,7 +131,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 
                 <input 
                     placeholder="Nome da Festa"
-                    value={name}
+                     value={name}
                     required={true}
                     onChange={event => setName(event.target.value)}
                     />
@@ -173,6 +184,12 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 </div>
 
                 <div className="col-6">
+                    
+                    <input placeholder="UF"
+                        value={state}
+                        onChange={event => setState(event.target.value)}
+                    />
+
                     <input placeholder="Distrito"
                         value={district}
                         onChange={event => setDistrict(event.target.value)}
@@ -181,11 +198,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input placeholder="Cidade"
                         value={city}
                         onChange={event => setCity(event.target.value)}
-                    />
-
-                    <input placeholder="Estado"
-                        value={state}
-                        onChange={event => setState(event.target.value)}
                     />
 
                     <input placeholder="Telefone"
@@ -204,7 +216,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 <input placeholder="Link do Banner"
                     type="file"
                     value={banner_link}
-                    onChange={event => setBanner_link(event.target.value)}
+                    onChange={handleChangeBanner}
                 />
 
                 <input placeholder="Tutorial Video Link"
@@ -229,7 +241,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
                 <label
                     className="dataHour"
-                > Termino do Evento:
+                > Início do Evento:
                     <input 
                         className="dataHour"
                         placeholder="Data de Início"
@@ -242,7 +254,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
                 <label
                     className="dataHour"
-                > Início do Evento:
+                > Termino do Evento:
                     <input  
                         className="dataHour"
                         placeholder="Data de Término"

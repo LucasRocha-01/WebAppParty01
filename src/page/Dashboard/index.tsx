@@ -6,13 +6,14 @@ import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
 
 import { useParties } from "../../hooks/useParties";
 import { useAuth } from "../../hooks/AuthContext";
-import { useUsers } from '../../hooks/useUser';
+// import { useUsers } from '../../hooks/useUser';
 
-import { Container, BoxContent, NextEvent, Anuncio, ImgParty } from "./styles";
+import { Container, BoxContent, NextEvent, Anuncio} from "./styles";
 import {BoxParty} from "../../components/BoxParty";
 
 import logoImg from "../../assets/images/logo.png";
-import PartyImg from "../../assets/images/party.jpg";
+import imgPB from "../../assets/images/patternbanner.jpg";
+// import imgPL from "../../assets/images/patternLogo.jpg";
 import AnuncioImg from "../../assets/images/Banner-vertical.gif";
 
 import { HeaderView } from "../../styles/globalStyles";
@@ -28,7 +29,7 @@ import Footer from '../../components/Footer';
 
  const Dashboard: React.FC = () => {
     const {parties, setSlugView} = useParties()
-    const { users } = useUsers();
+    // const { users } = useUsers();
 
     
     const { signOut } = useAuth();
@@ -45,56 +46,101 @@ import Footer from '../../components/Footer';
     function handleOpenViewPartyModal() {setIsViewPartyModalOpen(true);}
     function handleClosedViewPartyModal() {setIsViewPartyModalOpen(false);}
 
-    console.log(users);
+    // const copyParties = [...parties]
+    const partiesSorted = [...parties]
+    const firstParty = [...partiesSorted]
+
+    partiesSorted.sort((a,b) => (a.date_init > b.date_init) ? 1:-1);
+    
+    ;
 
     return(
         <>
             <HeaderView>    
                 <div>
-                    <img alt="test" className="logo" src={logoImg}/>
                     
+                    <img alt="test" className="item logo" src={logoImg}/>
                     
 
                     <button onClick={handleSignOut} >
-                        
-
                         <FiPower />
                     </button>
                 </div>  
-                {/* {users.map(user => (
-                    <li key={user.id}>
-                        <p>{user.name}</p>
-                    </li>
-                ))}      */}
 
 
                 
             </HeaderView>
-            <Container>
-                
+            <Container className="grid main">
 
-
-                    <div className="col-6">
+                <div className="nextEvent">
+                    {firstParty
+                    .sort((a,b) => (a.date_init > b.date_init) ? 1:-1)
+                    .slice(0,1)
+                    .map(party => (
+                    <div key={party.id}>
                         <h1>Proximo Evento</h1>
-                        <NextEvent>
-                            {/* {parties.filter(party => {party.date_init === Math.min(party.date_init) }) } */}
+                        <NextEvent 
+                            className="boxNE"
+                            onClick={() => {
+                                setSlugView(party.party_slug);
+                                handleOpenViewPartyModal()
+                            }}
+                        >                            
 
-                            <ImgParty style={{backgroundImage: `url(${PartyImg})` }} />
-                            <div>
-                                <h1>Color Fest</h1>
+                            <img className="imgNE"
+                                src={party.banner_link? party.banner_link : imgPB} 
+                                alt="banner"/>
+
+                            <div className="item content contentNE ">
+
+                                <div className="item row">
+                                    <h1>Nome Festa</h1>
+                                    <h2>{party.name}</h2>
+                                </div>
+
+                                <div className="item row description">
+                                    <h1>Descrição</h1>
+                                    <h2>{party.description}</h2>
+                                </div>
+                                    
+                                <div className="row">
+
+                                    <div className=" col-6">
+                                        <h1>Início:</h1>
+                                        <h2>
+                                            {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'long'}).format(
+                                            new Date(party.date_init))}
+                                        </h2>
+                                    </div>
+
+                                    <div className=" col-6">
+                                        <h1>Termino:</h1>
+                                        <h2>
+                                            {(party.date_close)}
+                                            {/* {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'long'}).format(
+                                            new Date(party.date_close))} */}
+                                        </h2>
+                                    </div>
+
+                                </div>
+
                             </div>
+                                
+
                         </NextEvent>
+                    </div>
+                    ))
+                } 
+                </div>      
 
-                        <BoxContent> 
-
-
-                            {parties
-                            // .filter( party => party.owner_id === users  )
-                            .map(party => (
-                                    <li key={party.id} >  
-
-                                        <div onClick={() => setSlugView(party.party_slug)}>
-                                            <div onClick={handleOpenViewPartyModal}>
+                <BoxContent className=" boxParty"> 
+                    {partiesSorted.slice(1)
+                        .map(party => (
+                                <li key={party.id} >  
+                                    <div onClick={() => {
+                                        setSlugView(party.party_slug);
+                                        handleOpenViewPartyModal()
+                                        }}>
                                         <BoxParty
                                             name={party.name}
                                             imgParty={party.banner_link}
@@ -102,24 +148,19 @@ import Footer from '../../components/Footer';
                                             date_close={party.date_close}
                                             type_event={party.type_event}
                                         />
-                                            </div>
-                                        </div>
-                                        
-                                    </li>      
-                                )
-                            )}    
-                        </BoxContent>
-                    </div>
-                    <div className="col-2">
-                        <Button 
-                            onClick={handleOpenNewPartyModal}
-                        >
-                        Nova Festa
-                        </Button>
-                        <Anuncio >
-                            <img src={AnuncioImg} alt="anuncio" />
-                        </Anuncio>
-                    </div>
+                                    </div>
+                                </li>      
+                            )
+                    )}    
+                </BoxContent>
+                
+                <Button className="btnAddParty" onClick={handleOpenNewPartyModal}>
+                    Nova Festa
+                </Button>
+
+                <Anuncio className="adsParty">
+                    <img src={AnuncioImg} alt="anuncio" />
+                </Anuncio>
 
             </Container>
 

@@ -13,6 +13,7 @@ export default function Footer() {
                     <li><a href="https://github.com/carlos-dev" target="_blank" rel="noreferrer" >GitHub - Carlos André </a></li>
                     <li><a href="https://github.com/eduardojesusdev" target="_blank" rel="noreferrer" >GitHub - Eduardo José </a></li>
                     <li><a href="https://github.com/LucasRocha-01" target="_blank" rel="noreferrer" >GitHub - Lucas Rocha</a></li>
+                    <li><a href="https://github.com/pinpassos" target="_blank" rel="noreferrer" >GitHub - Matheus Passos</a></li>
                 </ul>
             </div>
         </Container>

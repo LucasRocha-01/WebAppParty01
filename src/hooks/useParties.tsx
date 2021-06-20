@@ -27,7 +27,8 @@ interface Party {
 }
 
 type PartyRemove = Pick<Party, 'party_slug'>;
-type PartyInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' >;
+// type BannerParty = Pick<Party, 'banner_link'>;
+type PartyInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'banner_link' >;
 type PartyEditInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'party_slug' >;
 
 interface PartiesProviderProps {
@@ -51,7 +52,6 @@ export const PartiesContext = createContext<PartiesContextData>(
 export function PartiesProvider({children}: PartiesProviderProps) {
     const [parties, setParties] = useState<Party[]>([]);
     const [slugView, setSlugView] = useState<string>('');
-
     
     useEffect(() => {
         async function getToken() {
@@ -69,6 +69,7 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             ...partyInput, 
             createdAt: new Date(),
         })
+
         
         if (response.status === 200) {
             const {data} = await api.get('/owner');
@@ -76,8 +77,6 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             setParties(data.parties.data)
         }        
     }
-    
-    
     async function removeParty(partyRemove: PartyRemove) {
         
         const party_slug = slugView;
@@ -89,8 +88,6 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             setParties(data.parties.data)
         }       
     }
-    
-    
     async function editParty(partyEditInput: PartyEditInput) {
         
         const response = 
@@ -104,7 +101,11 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             setParties(data.parties.data)
         }        
     }
-        
+
+
+
+
+
     return (
         <PartiesContext.Provider value={{parties, editParty, removeParty, createParty, slugView, setSlugView}}>
             {children}

@@ -26,25 +26,25 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     console.log(party); //esta retornado todas as info de party
     
 
-    const [name, setName] =                 useState(`${party[0].name}`); //Property 'name' does not exist on type 'Party[]' 
-    const [description, setDescription] =   useState(`${party[0].description}`);
-    const [type_event, setType_event] =     useState(`${party[0].type_event? party[0].type_event : '' }`);
-    const [address, setAddress] =           useState(`${party[0].description? party[0].description : '' }`);
-    const [zipcode, setZipcode] =           useState(`${party[0].zipcode? party[0].zipcode : '' }`);
-    const [number, setNumber] =             useState(`${party[0].number? party[0].number : '' }`);
-    const [district, setDistrict] =         useState(`${party[0].district? party[0].district : '' }`);
-    const [city, setCity] =                 useState(`${party[0].city? party[0].city : '' }`);
-    const [state, setState] =               useState(`${party[0].state? party[0].state : '' }`);
-    const [tel, setTel] =                   useState(`${party[0].tel? party[0].tel : '' }`);
-    const [ticket_link, setTicket_link] =   useState(`${party[0].ticket_link? party[0].ticket_link : '' }`);
-    const [banner_link, setBanner_link] =   useState(`${party[0].banner_link? party[0].banner_link : '' }`);
+    const [name, setName]                   = useState(`${party[0].name? party[0].name : ''}`); //Property 'name' does not exist on type 'Party[]' 
+    const [description, setDescription]     = useState(`${party[0].description}`);
+    const [type_event, setType_event]       = useState(`${party[0].type_event? party[0].type_event : '' }`);
+    const [address, setAddress]             = useState(`${party[0].description? party[0].description : '' }`);
+    const [zipcode, setZipcode]             = useState(`${party[0].zipcode? party[0].zipcode : '' }`);
+    const [number, setNumber]               = useState(`${party[0].number? party[0].number : '' }`);
+    const [district, setDistrict]           = useState(`${party[0].district? party[0].district : '' }`);
+    const [city, setCity]                   = useState(`${party[0].city? party[0].city : '' }`);
+    const [state, setState]                 = useState(`${party[0].state? party[0].state : '' }`);
+    const [tel, setTel]                     = useState(`${party[0].tel? party[0].tel : '' }`);
+    const [ticket_link, setTicket_link]     = useState(`${party[0].ticket_link? party[0].ticket_link : '' }`);
+    const [banner_link, setBanner_link]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
     const [tutorial_video_link, setTutorial_video_link] = useState(`${party[0].tutorial_video_link? party[0].tutorial_video_link : '' }`);
     const [point_of_reference, setPoint_of_reference] = useState(`${party[0].point_of_reference? party[0].point_of_reference : '' }`);
-    const [presences, setPresences] =       useState(`${party[0].presences? party[0].presences : '' }`);
-    const [theme, setTheme] =               useState(`${party[0].theme? party[0].theme : '' }`);
-    const [atractions, setAtractions] =     useState(`${party[0].atractions? party[0].atractions : '' }`);
-    const [date_init, setDate_init] =       useState(`${party[0].date_init}`);
-    const [date_close, setDate_close] =     useState(`${party[0].date_close}`);
+    const [presences, setPresences]         = useState(`${party[0].presences? party[0].presences : '' }`);
+    const [theme, setTheme]                 = useState(`${party[0].theme? party[0].theme : '' }`);
+    const [atractions, setAtractions]       = useState(`${party[0].atractions? party[0].atractions : '' }`);
+    const [date_init, setDate_init]         = useState(`${party[0].date_init}`);
+    const [date_close, setDate_close]       = useState(`${party[0].date_close}`);
 
     async function handleEditParty(event: FormEvent) {
         event.preventDefault();

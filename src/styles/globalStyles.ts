@@ -32,30 +32,30 @@ export const GlobalStyle = createGlobalStyle`
             * {
         box-sizing: border-box;
         }
-
+        /* 
         .row::after {
         content: "";
         clear: both;
         display: table;
-        }
+        } */
 
         [class*="col-"] {
         float: left;
         padding: 15px;
         }
 
-        .col-1 {width: 8.33%;}
-        .col-2 {width: 16.66%;}
-        .col-3 {width: 25%;}
-        .col-4 {width: 33.33%;}
-        .col-5 {width: 41.66%;}
-        .col-6 {width: 50%;}
-        .col-7 {width: 58.33%;}
-        .col-8 {width: 66.66%;}
-        .col-9 {width: 75%;}
+        /* .col-1  {width: 8.33%;}
+        .col-2  {width: 16.66%;}
+        .col-3  {width: 25%;}
+        .col-4  {width: 33.33%;}
+        .col-5  {width: 41.66%;}
+        .col-6  {width: 50%;}
+        .col-7  {width: 58.33%;}
+        .col-8  {width: 66.66%;}
+        .col-9  {width: 75%;}
         .col-10 {width: 83.33%;}
         .col-11 {width: 91.66%;}
-        .col-12 {width: 100%;}
+        .col-12 {width: 100%;} */
 
         html {
         font-family: "Lucida Sans", sans-serif;
@@ -85,33 +85,11 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #0099cc;
         }
 
-        @media only screen and (max-width: 550px) {
-            .container {
-                grid-template-columns: 1fr;
-                grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
-                grid-template-areas:
-                "nav"
-                "sidebar"
-                "main"
-                "content1"
-                "content2"
-                "content3"
-                "footer";
-            }
-        }
 
     // - TESTE
 
     // font-sige: 16px(desktop) 
-    html {
-        @media (max-width: 1080px) {
-            font-size: 93.75%
-        }
 
-        @media (max-width: 720px) {
-            font-size: 87.5%; 
-        }
-    }
 
     body {
         background: var(--background);
