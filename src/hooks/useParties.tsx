@@ -17,6 +17,7 @@ interface Party {
     tel: string,
     ticket_link: string,
     banner_link: string,
+    banner_link2: any,
     tutorial_video_link: string,
     point_of_reference: string,
     presences: string,
@@ -69,14 +70,25 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             ...partyInput, 
             createdAt: new Date(),
         })
-
         
         if (response.status === 200) {
             const {data} = await api.get('/owner');
             
-            setParties(data.parties.data)
+            setParties(data.parties.data);
+
+            uploadBanner(partyInput)
         }        
     }
+
+    async function uploadBanner(partyInput: PartyInput) {
+        const formData = new FormData();
+        formData.append(
+            "banner",
+            partyInput.banner_link2
+        );       
+        await api.post(`/owner/upload-banner/${partyInput.party_slug}`, formData)
+    }
+
     async function removeParty(partyRemove: PartyRemove) {
         
         const party_slug = slugView;

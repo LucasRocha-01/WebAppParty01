@@ -38,6 +38,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [tel, setTel]                     = useState(`${party[0].tel? party[0].tel : '' }`);
     const [ticket_link, setTicket_link]     = useState(`${party[0].ticket_link? party[0].ticket_link : '' }`);
     const [banner_link, setBanner_link]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
+    const [banner_link2, setBanner_link2]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
     const [tutorial_video_link, setTutorial_video_link] = useState(`${party[0].tutorial_video_link? party[0].tutorial_video_link : '' }`);
     const [point_of_reference, setPoint_of_reference] = useState(`${party[0].point_of_reference? party[0].point_of_reference : '' }`);
     const [presences, setPresences]         = useState(`${party[0].presences? party[0].presences : '' }`);
@@ -63,6 +64,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             tel,
             ticket_link,
             banner_link,
+            banner_link2,
             tutorial_video_link,
             point_of_reference,
             presences,

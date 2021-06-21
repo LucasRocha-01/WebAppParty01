@@ -35,6 +35,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [tel, setTel] = useState('');
     const [ticket_link, setTicket_link] = useState('');
     const [banner_link, setBanner_link] = useState('');
+    const [banner_link2, setBanner_link2] = useState({});
     const [tutorial_video_link, setTutorial_video_link] = useState('');
     const [point_of_reference, setPoint_of_reference] = useState('');
     const [presences, setPresences] = useState('');
@@ -47,10 +48,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
     const handleChangeBanner = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
-            if (e.target.files) {
-                console.log(e.target.files[0]);
-                
-               // setBanner_link(e.target.files[0])
+            if (e.target.files) {               
+                setBanner_link2(e.target.files[0])
             }
         },[]
     );
@@ -80,7 +79,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             date_init,
             date_close,
 
-            // banner_link,
+            banner_link2,
         })
 
         setName('');
@@ -96,6 +95,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setTel('');
         setTicket_link('');
         setBanner_link('');
+        setBanner_link2('');
         setTutorial_video_link('');
         setPoint_of_reference('');
         setPresences('');
@@ -215,7 +215,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
                 <input placeholder="Link do Banner"
                     type="file"
-                    value={banner_link}
                     onChange={handleChangeBanner}
                 />
 
