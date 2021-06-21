@@ -10,6 +10,7 @@ export const Container = styled.form`
     .col-6 {
         padding-right: 0;
         padding-left: 0;
+        width: 50%;
 
         & + .col-6 {
             padding-left: 1rem;
@@ -61,6 +62,8 @@ export const Container = styled.form`
         input {
             height: 30px;
             flex: 0.5;
+            background: transparent;
+            border: none;
         }
     }
 

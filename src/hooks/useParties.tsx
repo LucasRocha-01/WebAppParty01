@@ -30,7 +30,7 @@ interface Party {
 type PartyRemove = Pick<Party, 'party_slug'>;
 // type BannerParty = Pick<Party, 'banner_link'>;
 type PartyInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'banner_link' >;
-type PartyEditInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'party_slug' >;
+type PartyEditInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'party_slug' | 'banner_link' >;
 
 interface PartiesProviderProps {
     children: ReactNode;
@@ -87,6 +87,10 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             partyInput.banner_link2
         );       
         await api.post(`/owner/upload-banner/${partyInput.party_slug}`, formData)
+        
+        const {data} = await api.get('/owner');
+            
+        setParties(data.parties.data)
     }
 
     async function removeParty(partyRemove: PartyRemove) {
@@ -111,7 +115,22 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             const {data} = await api.get(`/owner`);
             
             setParties(data.parties.data)
+
+            uploadEditBanner(partyEditInput)
         }        
+    }
+
+    async function uploadEditBanner(pET: PartyEditInput) {
+        const formData = new FormData();
+        formData.append(
+            "banner",
+            pET.banner_link2
+        );       
+        await api.post(`/owner/upload-banner/${slugView}`, formData)
+
+        const {data} = await api.get('/owner');
+            
+        setParties(data.parties.data)
     }
 
 

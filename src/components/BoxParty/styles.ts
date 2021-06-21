@@ -4,13 +4,21 @@ import styled from 'styled-components';
 
 export const ContainerBP = styled.div`
 
+    padding-left:   20px;
+    padding-right:  30px;
+
+    svg {
+        color: #8D88FF;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 
     display: flex;
     align-items: center;
 
     width: 100%;
     height: auto;
-    padding-left: 20px;
+    /* padding-left: 5px; */
 
     border-radius: 6px;
 
@@ -39,7 +47,7 @@ export const ContainerBP = styled.div`
 
 export const ContentBP = styled.div`
 
-    padding: 10px;
+    /* padding: 10px; */
 
     section {
         display: grid;
@@ -48,19 +56,19 @@ export const ContentBP = styled.div`
         color: var(--text-light);
         font-size: 12px;
 
-        grid-template-columns: 1fr 7fr 1fr 3fr;
+        grid-template-columns: 1fr 1fr 2fr 1fr;
         grid-template-areas:
-        "logo   nameParty   hourClock   dateInit"
-        "logo   typeParty   hourClock   dateClose"
+        "logo   nameParty   nameParty   dateInit"
+        "logo   typeParty   typeParty   dateClose"
         ;
     
 
         .item {
-        display: flex;
-        align-items: center;
+            display: flex;
+            align-items: center;
 
-        text-align: center;
-        font-size: 1.5em;
+            text-align: center;
+            font-size: 1.5em;
         }
     }
 
@@ -79,22 +87,27 @@ export const ContentBP = styled.div`
 
     .nameParty{
         grid-area: nameParty;
+        margin: 0;
     }
 
     .typeParty{
         grid-area: typeParty;
+        margin: 0;
     }
 
     .hourClock{
             grid-area: hourClock;
+            margin: 0;
         }
 
     .dateInit{
         grid-area: dateInit;
+        margin: 0;
     }
 
     .dateClose{
         grid-area: dateClose;
+        margin: 0;
     }
 
 `;

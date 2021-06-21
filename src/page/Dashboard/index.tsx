@@ -108,17 +108,32 @@ import Footer from '../../components/Footer';
                                     <div className=" col-6">
                                         <h1>Início:</h1>
                                         <h2>
-                                            {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'long'}).format(
-                                            new Date(party.date_init))}
+                                            {
+                                                new Date(party.date_init).getUTCDate()+'/'+
+                                                new Date(party.date_init).getUTCMonth()+'/'+
+                                                new Date(party.date_init).getUTCFullYear()
+                                            }
+                                                {' às '}
+                                            {
+                                                new Date(party.date_init).getUTCHours()+':'+
+                                                new Date(party.date_init).getUTCMinutes()+'H'
+                                            }
                                         </h2>
                                     </div>
 
                                     <div className=" col-6">
                                         <h1>Termino:</h1>
                                         <h2>
-                                            {(party.date_close)}
-                                            {/* {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'long'}).format(
-                                            new Date(party.date_close))} */}
+                                            {
+                                                new Date(party.date_close).getUTCDate()+'/'+
+                                                new Date(party.date_close).getUTCMonth()+'/'+
+                                                new Date(party.date_close).getUTCFullYear()
+                                            }
+                                                {' às '}
+                                            {
+                                                new Date(party.date_close).getUTCHours()+':'+
+                                                new Date(party.date_close).getUTCMinutes()+'H'
+                                            }
                                         </h2>
                                     </div>
 
@@ -146,7 +161,7 @@ import Footer from '../../components/Footer';
                                             imgParty={party.banner_link}
                                             date_init={party.date_init}
                                             date_close={party.date_close}
-                                            type_event={party.type_event}
+                                            theme={party.theme}
                                         />
                                     </div>
                                 </li>      

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import Modal from 'react-modal';
 
 import CloseImg from '../../../assets/images/close.svg';
@@ -37,8 +37,8 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [state, setState]                 = useState(`${party[0].state? party[0].state : '' }`);
     const [tel, setTel]                     = useState(`${party[0].tel? party[0].tel : '' }`);
     const [ticket_link, setTicket_link]     = useState(`${party[0].ticket_link? party[0].ticket_link : '' }`);
-    const [banner_link, setBanner_link]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
-    const [banner_link2, setBanner_link2]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
+    // const [banner_link, setBanner_link]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
+    const [banner_link2, setBanner_link2]     = useState({});
     const [tutorial_video_link, setTutorial_video_link] = useState(`${party[0].tutorial_video_link? party[0].tutorial_video_link : '' }`);
     const [point_of_reference, setPoint_of_reference] = useState(`${party[0].point_of_reference? party[0].point_of_reference : '' }`);
     const [presences, setPresences]         = useState(`${party[0].presences? party[0].presences : '' }`);
@@ -46,6 +46,16 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [atractions, setAtractions]       = useState(`${party[0].atractions? party[0].atractions : '' }`);
     const [date_init, setDate_init]         = useState(`${party[0].date_init}`);
     const [date_close, setDate_close]       = useState(`${party[0].date_close}`);
+    
+    // const [party_slug, setParty_slug]       = useState(`${party[0].party_slug}`);
+
+    const handleChangeBanner = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            if (e.target.files) {               
+                setBanner_link2(e.target.files[0])
+            }
+        },[]
+    );
 
     async function handleEditParty(event: FormEvent) {
         event.preventDefault();
@@ -53,6 +63,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         await editParty({
    
             name,
+            // party_slug,
             description,
             type_event,
             address,
@@ -63,7 +74,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             state,
             tel,
             ticket_link,
-            banner_link,
+            // banner_link,
             banner_link2,
             tutorial_video_link,
             point_of_reference,
@@ -193,11 +204,12 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     onChange={event => setTicket_link(event.target.value)}
                 />
 
-                <input placeholder="Link do Banner"
-                    type="file"
-                    value={banner_link}
-                    onChange={event => setBanner_link(event.target.value)}
-                />
+                <label>
+                    <input placeholder="Link do Banner"
+                        type="file"
+                        onChange={handleChangeBanner}
+                    />
+                </label>
 
                 <input placeholder="Tutorial Video Link"
                     value={tutorial_video_link}
@@ -225,9 +237,8 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input 
                         className="dataHour"
                         placeholder="Data de Início"
-                        value={date_init}
+                        // value={date_init}
                         type="datetime-local"
-                        required={true}
                         onChange={event => setDate_init(event.target.value)}
                     />
                 </label>
@@ -240,7 +251,6 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         placeholder="Data de Término"
                         value={date_close}
                         type="datetime-local"
-                        required={true}
                         onChange={event => setDate_close(event.target.value)}
                     />
                 </label>
@@ -249,7 +259,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 
 
                 <button type="submit">
-                    Cadastrar
+                    Editar
                 </button>
 
             </Container>

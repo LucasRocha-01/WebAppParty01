@@ -32,12 +32,12 @@ export const GlobalStyle = createGlobalStyle`
             * {
         box-sizing: border-box;
         }
-        /* 
+        
         .row::after {
         content: "";
         clear: both;
         display: table;
-        } */
+        }
 
         [class*="col-"] {
         float: left;

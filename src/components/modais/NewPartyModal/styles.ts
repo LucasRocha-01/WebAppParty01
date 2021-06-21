@@ -126,11 +126,11 @@ export const Container = styled.form`
     .zipCode {
         width: 60%;
 
-        margin-right: 5%;
     }
 
     .numberCode {
         width: 35%;
+        margin-right: 5%;
     }
 
     .dataHour {

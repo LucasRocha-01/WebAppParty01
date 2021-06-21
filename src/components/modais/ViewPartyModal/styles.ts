@@ -2,6 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
+    .row {
+        margin: 20px;
+    }
+
+    .col-6 {
+        width: 50%;
+    }
     /* .menuView {
             position: absolute;
             right: 1.5rem;

@@ -1,5 +1,6 @@
 import { FormEvent, useState, ChangeEvent, useCallback } from 'react';
 import Modal from 'react-modal';
+import {v4 as uuidv4} from 'uuid'
 
 import CloseImg from '../../../assets/images/close.svg';
 import { useParties } from '../../../hooks/useParties';
@@ -34,7 +35,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [state, setState] = useState('');
     const [tel, setTel] = useState('');
     const [ticket_link, setTicket_link] = useState('');
-    const [banner_link, setBanner_link] = useState('');
+    // const [banner_link, setBanner_link] = useState('');
     const [banner_link2, setBanner_link2] = useState({});
     const [tutorial_video_link, setTutorial_video_link] = useState('');
     const [point_of_reference, setPoint_of_reference] = useState('');
@@ -56,6 +57,10 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
     async function handleCreateNewParty(event: FormEvent, ) {
         event.preventDefault(); 
+
+        const uuid = uuidv4()
+        uuid.toString()
+        setParty_slug(uuid)
 
         await createParty({
    
@@ -94,7 +99,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setState('');
         setTel('');
         setTicket_link('');
-        setBanner_link('');
+        // setBanner_link('');
         setBanner_link2('');
         setTutorial_video_link('');
         setPoint_of_reference('');
@@ -144,11 +149,11 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     
                     />
 
-                <input placeholder="Slug da Festa"
+                {/* <input placeholder="Slug da Festa"
                     value={party_slug}
                     required={true}
                     onChange={event => setParty_slug(event.target.value)}
-                />
+                /> */}
 
                 <div className="col-6">
                     <input placeholder="Endereço"
@@ -156,16 +161,18 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         onChange={event => setAddress(event.target.value)}
                     />
 
-                    <input placeholder="CEP"
-                        value={zipcode}
-                        onChange={event => setZipcode(event.target.value)}
-                        className="zipCode"
-                    />
-
                     <input placeholder="Número"
                         value={number}
                         onChange={event => setNumber(event.target.value)}
                         className="numberCode"
+                        type="number"
+                    />
+
+                    <input placeholder="CEP"
+                        value={zipcode}
+                        onChange={event => setZipcode(event.target.value)}
+                        className="zipCode"
+                        type="number"
                     />
                         
                         <input placeholder="Ponto de Referencia"
@@ -188,6 +195,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input placeholder="UF"
                         value={state}
                         onChange={event => setState(event.target.value)}
+                        data-ls-module="charCounter" maxLength={2}
+                    
                     />
 
                     <input placeholder="Distrito"
@@ -203,6 +212,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input placeholder="Telefone"
                         value={tel}
                         onChange={event => setTel(event.target.value)}
+                        type="number"
                     />
                 </div>
 
@@ -213,10 +223,12 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     onChange={event => setTicket_link(event.target.value)}
                 />
 
-                <input placeholder="Link do Banner"
-                    type="file"
-                    onChange={handleChangeBanner}
-                />
+                <label>
+                    <input placeholder="Link do Banner"
+                        type="file"
+                        onChange={handleChangeBanner}
+                    />
+                </label>
 
                 <input placeholder="Tutorial Video Link"
                     value={tutorial_video_link}
