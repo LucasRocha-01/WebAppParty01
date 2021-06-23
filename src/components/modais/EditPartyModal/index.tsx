@@ -54,10 +54,10 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [date_init, setDate_init]         = useState(`${party[0].date_init}`);
     const [date_close, setDate_close]       = useState(`${party[0].date_close}`);
     
-    const [city, setCity] = useState<string[]>([`${party[0].city? party[0].city : '0' }`]);
-    const [state, setState] = useState<string[]>([`${party[0].state? party[0].state : '0' }`]);
-    const [selectedUf, setSelectedUf] = useState("0");
-    const [selectedCity, setSelectedCity] = useState("0");
+    const [city, setCity] =     useState<string[]>([`${party[0].city? party[0].city : '0' }`]);
+    const [state, setState] =   useState<string[]>([`${party[0].state? party[0].state : '0' }`]);
+    const [selectedCity, setSelectedCity] = useState(`${party[0].city? party[0].city : '0' }`);
+    const [selectedUf, setSelectedUf] =     useState(`${party[0].state? party[0].state : '0' }`);
     
     useEffect(() => {
         axios
@@ -229,7 +229,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         value={selectedUf}
                         onChange={handleSelectUf}
                     >
-                        <option value="0">Selecione uma UF</option>
+                        <option value={selectedUf}>{selectedUf}</option>
                         {state.map((uf) => (
                             <option key={uf} value={uf}>
                             {uf}
@@ -243,7 +243,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         value={selectedCity}
                         onChange={handleSelectCity}
                     >
-                        <option value="0">Selecione uma Cidade</option>
+                        <option value={selectedCity}>{selectedCity}</option>
                         {city.map((citys) => (
                         <option key={citys} value={citys}>
                             {citys}
@@ -297,18 +297,6 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
                 <label
                     className="dataHour"
-                > Termino do Evento:
-                    <input 
-                        className="dataHour"
-                        placeholder="Data de Início"
-                        // value={date_init}
-                        type="datetime-local"
-                        onChange={event => setDate_init(event.target.value)}
-                    />
-                </label>
-
-                <label
-                    className="dataHour"
                 > Início do Evento:
                     <input  
                         className="dataHour"
@@ -316,6 +304,18 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         value={date_close}
                         type="datetime-local"
                         onChange={event => setDate_close(event.target.value)}
+                    />
+                </label>
+
+                <label
+                    className="dataHour"
+                > Termino do Evento:
+                    <input 
+                        className="dataHour"
+                        placeholder="Data de Início"
+                        // value={date_init}
+                        type="datetime-local"
+                        onChange={event => setDate_init(event.target.value)}
                     />
                 </label>
                 
