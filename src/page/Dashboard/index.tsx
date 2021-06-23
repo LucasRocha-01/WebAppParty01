@@ -53,7 +53,6 @@ import Footer from '../../components/Footer';
     partiesSorted.sort((a,b) => (a.date_init > b.date_init) ? 1:-1);
     
     console.log(users);
-    
 
     return(
         <>

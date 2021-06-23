@@ -143,6 +143,12 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 
                                 <span>Atrações:</span>
                                 <h2>{party.atractions}</h2>
+                                
+                                <span>Latitude:</span>
+                                <h2>{party.latitude}</h2>
+                                
+                                <span>Longitude:</span>
+                                <h2>{party.longitude}</h2>
 
                             </div>
                         </div>

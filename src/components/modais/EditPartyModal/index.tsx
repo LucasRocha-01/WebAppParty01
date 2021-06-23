@@ -53,8 +53,8 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [date_init, setDate_init]         = useState(`${party[0].date_init}`);
     const [date_close, setDate_close]       = useState(`${party[0].date_close}`);
     
-    const [latitude, setLatitude]           = useState(`${party[0].latitude? party[0].latitude : ''}`);
-    const [longitude, setLongitude]         = useState(`${party[0].longitude? party[0].longitude : ''}`);
+    const [latitude, setLatitude]           = useState(party[0].latitude? party[0].latitude : 0);
+    const [longitude, setLongitude]         = useState(party[0].longitude? party[0].longitude : 0);
     
     const [city, setCity] =     useState<string[]>([`${party[0].city? party[0].city : '0' }`]);
     const [state, setState] =   useState<string[]>([`${party[0].state? party[0].state : '0' }`]);
@@ -267,12 +267,12 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 <label>
                     <input placeholder="Longitude" 
                         value={longitude}
-                        onChange={event => setLongitude(event.target.value)}
+                        onChange={event => setLongitude(event.target.valueAsNumber)}
                     />
 
                     <input placeholder="Latitude" 
                         value={latitude}
-                        onChange={event => setLatitude(event.target.value)}
+                        onChange={event => setLatitude(event.target.valueAsNumber)}
                     />
                 </label>
 

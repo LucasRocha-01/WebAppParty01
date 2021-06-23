@@ -53,8 +53,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [date_init, setDate_init] = useState('');
     const [date_close, setDate_close] = useState('');
 
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
     
     const [city, setCity] = useState<string[]>([]);
     const [state, setState] = useState<string[]>([]);
@@ -120,6 +120,9 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
     async function handleCreateNewParty(event: FormEvent, ) {
 
+        // latitude.parseFloat()
+        // longitude.parseFloat() 
+
         setState([selectedUf]);
         setCity([selectedCity]);
 
@@ -163,8 +166,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setZipcode('');
         setNumber('');
         setDistrict('');
-        setLatitude('');
-        setLongitude('');
+        setLatitude(0);
+        setLongitude(0);
         setCity([]);
         setState([]);
         setTel('');
@@ -301,18 +304,28 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     />
                 </div>
 
-                <label>
-                    <input placeholder="Longitude" 
+                <label className="latlonglabel"> Adicione a sua Latitude e Longitude </label>
+                <span className="latlongSpan">{'Descubra sua Latitude e Longitude em:   .'} {<a href="https://www.latlong.net/" target="_blank" rel="noreferrer">latlong.net</a>} </span>
+                
+                <div className="row">
+                <label className="dataHour">
+                    <input 
+                        placeholder="Longitude" 
+                        type='text'
                         value={longitude}
-                        onChange={event => setLongitude(event.target.value)}
+                        onChange={event => setLongitude(event.target.valueAsNumber)}
                     />
-
-                    <input placeholder="Latitude" 
-                        value={latitude}
-                        onChange={event => setLatitude(event.target.value)}
-                    />
-
                 </label>
+
+                <label className="dataHour">
+                    <input 
+                        placeholder="Latitude" 
+                        type='text'
+                        value={latitude}
+                        onChange={event => setLatitude(event.target.valueAsNumber)}
+                    />
+                </label>
+                </div>
 
                 <input placeholder="Link de venda de Tickets"
                     value={ticket_link}
@@ -347,29 +360,29 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 />
 
                 <label
-                    className="dataHour"
-                > Início do Evento:
-                    <input 
                         className="dataHour"
-                        placeholder="Data de Início"
-                        value={date_init}
-                        type="datetime-local"
-                        required={true}
-                        onChange={event => setDate_init(event.target.value)}
-                    />
+                    > Início do Evento:
+                        <input 
+                            className="dataHour"
+                            placeholder="Data de Início"
+                            value={date_init}
+                            type="datetime-local"
+                            required={true}
+                            onChange={event => setDate_init(event.target.value)}
+                        />
                 </label>
 
                 <label
-                    className="dataHour"
-                > Termino do Evento:
-                    <input  
                         className="dataHour"
-                        placeholder="Data de Término"
-                        value={date_close}
-                        type="datetime-local"
-                        required={true}
-                        onChange={event => setDate_close(event.target.value)}
-                    />
+                    > Termino do Evento:
+                        <input  
+                            className="dataHour"
+                            placeholder="Data de Término"
+                            value={date_close}
+                            type="datetime-local"
+                            required={true}
+                            onChange={event => setDate_close(event.target.value)}
+                        />
                 </label>
                 
 
