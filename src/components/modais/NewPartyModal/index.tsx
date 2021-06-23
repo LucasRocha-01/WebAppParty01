@@ -108,7 +108,17 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     //     }
     // );
 
+    function handleLat(event: ChangeEvent<HTMLInputElement>) {
+        const lat = event.target.value
+        
+        setLatitude(parseFloat(lat));
+      }
 
+    function handleLong(event: ChangeEvent<HTMLInputElement>) {
+        const long = event.target.value
+        
+        setLongitude(parseFloat(long));
+      }
 
     const handleChangeBanner = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -131,6 +141,10 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         const uuid = uuidv4()
         uuid.toString()
         setParty_slug(uuid)
+
+        console.log(latitude);
+        console.log(longitude);
+        
 
         await createParty({
    
@@ -305,26 +319,27 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 </div>
 
                 <label className="latlonglabel"> Adicione a sua Latitude e Longitude </label>
-                <span className="latlongSpan">{'Descubra sua Latitude e Longitude em:   .'} {<a href="https://www.latlong.net/" target="_blank" rel="noreferrer">latlong.net</a>} </span>
+                <span className="latlongSpan">{'Descubra sua Latitude e Longitude em:   .'} {<a href="https://satellite-map.gosur.com/pt/latitude-longitude-coordenadas-GPS.html" target="_blank" rel="noreferrer">Descubra aqui</a>} </span>
                 
                 <div className="row">
                 <label className="dataHour">
                     <input 
-                        placeholder="Longitude" 
-                        type='text'
-                        value={longitude}
-                        onChange={event => setLongitude(event.target.valueAsNumber)}
+                        placeholder="Latitude" 
+                        type="text"
+                        // value=""
+                        onChange={handleLat}
                     />
                 </label>
 
                 <label className="dataHour">
                     <input 
-                        placeholder="Latitude" 
-                        type='text'
-                        value={latitude}
-                        onChange={event => setLatitude(event.target.valueAsNumber)}
+                        placeholder="Longitude" 
+                        type="text"
+                        // value=""
+                        onChange={handleLong}
                     />
                 </label>
+
                 </div>
 
                 <input placeholder="Link de venda de Tickets"

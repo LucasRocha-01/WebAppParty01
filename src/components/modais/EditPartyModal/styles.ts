@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.form`
 
+    .row {
+        margin: 20px;
+    }
+    
     overflow: scroll;
     height: 80vh;
 

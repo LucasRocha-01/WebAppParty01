@@ -14,6 +14,7 @@ interface Party {
     district: string,
     city: string[],
     state: string[],
+    presences: string,
     latitude: number,
     longitude: number,
     tel: string,
@@ -30,8 +31,8 @@ interface Party {
 
 type PartyRemove = Pick<Party, 'party_slug'>;
 // type BannerParty = Pick<Party, 'banner_link'>;
-type PartyInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'banner_link' >;
-type PartyEditInput = Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'party_slug' | 'banner_link' >;
+type PartyInput =       Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'banner_link' | 'presences'>;
+type PartyEditInput =   Omit<Party, 'id' | 'createdAt' | 'owner_id' | 'banner_link' | 'presences' | 'party_slug' >;
 
 interface PartiesProviderProps {
     children: ReactNode;

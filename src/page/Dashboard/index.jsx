@@ -59,7 +59,7 @@ import Footer from '../../components/Footer';
             <HeaderView>    
                 <div>
                     <img alt="test" className="item logo" src={logoImg}/>
-                    {/* <h1>Seja Bem Vinde, {users.user.name}</h1> */}
+                    {users[0].name}
                     <button onClick={handleSignOut} >
                         <FiPower />
                     </button>

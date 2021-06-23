@@ -264,17 +264,25 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     />
                 </div>
 
-                <label>
-                    <input placeholder="Longitude" 
+                <div className="row">
+                <label className="dataHour">
+                    <input 
+                        placeholder="Longitude" 
+                        type='text'
                         value={longitude}
                         onChange={event => setLongitude(event.target.valueAsNumber)}
                     />
+                </label>
 
-                    <input placeholder="Latitude" 
+                <label className="dataHour">
+                    <input 
+                        placeholder="Latitude" 
+                        type='text'
                         value={latitude}
                         onChange={event => setLatitude(event.target.valueAsNumber)}
                     />
                 </label>
+                </div>
 
                 <input placeholder="Link de venda de Tickets"
                     value={ticket_link}

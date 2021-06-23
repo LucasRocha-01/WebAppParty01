@@ -136,7 +136,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 <h2>{party.point_of_reference}</h2>
                                 
                                 <span>Presenças:</span>
-                                {/* <h2>{party.presences}</h2> */}
+                                <h2>{JSON.parse(party.presences).length === 0 ? "Sem presenças confirmadas" : JSON.parse(party.presences).length}</h2>
                                 
                                 <span>Tema da Festa:</span>
                                 <h2>{party.theme}</h2>
