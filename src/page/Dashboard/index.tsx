@@ -8,7 +8,7 @@ import { useParties } from "../../hooks/useParties";
 import { useAuth } from "../../hooks/AuthContext";
 // import { useUsers } from '../../hooks/useUser';
 
-import { Container, BoxContent, NextEvent, Anuncio} from "./styles";
+import { Container, BoxContent, NextEvent, Anuncio, InfoSemParty } from "./styles";
 import {BoxParty} from "../../components/BoxParty";
 
 import logoImg from "../../assets/images/logo.png";
@@ -19,7 +19,7 @@ import AnuncioImg from "../../assets/images/Banner-vertical.gif";
 import { HeaderView } from "../../styles/globalStyles";
 import { Button } from "../../styles/globalStyles"
 
-import { FiPower } from 'react-icons/fi';
+import { FiInfo, FiPower } from 'react-icons/fi';
 import Footer from '../../components/Footer';
 
 // interface DashboardProps {
@@ -73,10 +73,23 @@ import Footer from '../../components/Footer';
             <Container className="grid main">
 
                 <div className="nextEvent">
-                    {firstParty
+                    {parties.length === 0 ? 
+                    
+                    <InfoSemParty>
+                        <div><FiInfo size={30} /></div>
+                        <div>
+                            <h1>Você ainda não possui festas cadastradas!</h1>
+                            <span>Suas festas apareceram aqui!</span>
+                        </div>
+                    </InfoSemParty>
+                    
+                    
+                    :
+                    
+                    firstParty
                     .sort((a,b) => (a.date_init > b.date_init) ? 1:-1)
                     .slice(0,1)
-                    .map(party => (
+                    .map(party => ( 
                     <div key={party.id}>
                         <h1>Proximo Evento</h1>
                         <NextEvent 
@@ -91,21 +104,20 @@ import Footer from '../../components/Footer';
                                 src={party.banner_link? party.banner_link : imgPB} 
                                 alt="banner"/>
 
-                            <div className="item content contentNE ">
+                            <div className="content contentNE ">
 
-                                <div className="item row">
+                                <div className="row">
                                     <h1>Nome Festa</h1>
                                     <h2>{party.name}</h2>
                                 </div>
 
-                                <div className="item row description">
+                                <div className="row description">
                                     <h1>Descrição</h1>
                                     <h2>{party.description}</h2>
                                 </div>
                                     
                                 <div className="row">
-
-                                    <div className=" col-6">
+                                    <div className="col-6">
                                         <h1>Início:</h1>
                                         <h2>
                                             {
@@ -120,8 +132,9 @@ import Footer from '../../components/Footer';
                                             }
                                         </h2>
                                     </div>
-
-                                    <div className=" col-6">
+                                </div>
+                                <div className="row">
+                                    <div className="col-6">
                                         <h1>Termino:</h1>
                                         <h2>
                                             {
@@ -136,15 +149,14 @@ import Footer from '../../components/Footer';
                                             }
                                         </h2>
                                     </div>
-
                                 </div>
-
                             </div>
                                 
 
                         </NextEvent>
                     </div>
                     ))
+                    
                 } 
                 </div>      
 

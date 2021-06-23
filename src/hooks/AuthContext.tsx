@@ -15,7 +15,7 @@ interface SignUpCredentials {
     name: string;
     email: string;
     password: string;
-    password_confirmation: string;
+    password_confirmation:  string;
     birthdate: string;
     remember: boolean;
 }
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     },[])
 
     const signUp = useCallback(async({ name, email, password, password_confirmation, birthdate, remember}) => {
-        const response = await api.post('/owner-guest/signup', {
+        await api.post('/owner-guest/signup', {
             name,
             email,
             password,
@@ -64,12 +64,11 @@ export const AuthProvider: React.FC = ({ children }) => {
             remember,
         });
 
-        const {token} = response.data;
+        // const {token} = response.data;
 
-        localStorage.setItem('@AppParty:token', token);
+        // localStorage.setItem('@AppParty:token', token);
 
-        setData({token})
-
+        // setData({token})
         
     },[])
 

@@ -98,47 +98,47 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 
 
                                 <span>LGBT?:
-                                <h2>{party.type_event}</h2>
+                                <h2>{party.type_event === 'true' ? 'true' : 'false'}</h2>
                                 </span>
-                                <span>address:</span>
+                                <span>Endereço:</span>
                                 <h2>{party.address}</h2>
                                 
-                                <span>zipcode:</span>
+                                <span>CEP:</span>
                                 <h2>{party.zipcode}</h2>
                                 
-                                <span>number:</span>
+                                <span>Numero:</span>
                                 <h2>{party.number}</h2>
                                 
-                                <span>district:</span>
+                                <span>Bairro:</span>
                                 <h2>{party.district}</h2>
                                 
-                                <span>city:</span>
+                                <span>Cidade:</span>
                                 <h2>{party.city}</h2>
                             </div>
 
                             <div className="col-6">
-                                <span>state:</span>
+                                <span>Estado:</span>
                                 <h2>{party.state}</h2>
                                 
-                                <span>tel:</span>
+                                <span>Telefone:</span>
                                 <h2>{party.tel}</h2>
                                 
-                                <span>ticket_link:</span>
+                                <span>Link de Compra Ingresso:</span>
                                 <h2>{party.ticket_link}</h2>
                                 
-                                <span>tutorial_video_link:</span>
+                                <span>Video da Festa:</span>
                                 <h2>{party.tutorial_video_link}</h2>
                                 
-                                <span>point_of_reference:</span>
+                                <span>Ponto de Referencia:</span>
                                 <h2>{party.point_of_reference}</h2>
                                 
-                                <span>presences:</span>
+                                <span>Presenças:</span>
                                 <h2>{party.presences}</h2>
                                 
-                                <span>theme:</span>
+                                <span>Tema da Festa:</span>
                                 <h2>{party.theme}</h2>
                                 
-                                <span>atractions:</span>
+                                <span>Atrações:</span>
                                 <h2>{party.atractions}</h2>
 
                             </div>

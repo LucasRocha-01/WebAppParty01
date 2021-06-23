@@ -1,4 +1,4 @@
-import { shade } from 'polished';
+import { lighten, shade } from 'polished';
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -84,17 +84,36 @@ export const NextEvent = styled.div`
 
     display: grid;
     justify-content: center;
+        align-items: center;
 
 
-    .imgNE { grid-area: imgNE;}
+    .imgNE { 
+        grid-area: imgNE;
+        }
     .contentNE { grid-area: contentNE;}
+        width: 100%;
+        align-items: center;
+
+        .row {
+            /* margin-left: 5px; */
+            margin: 15px;
+        }
+
+        .col-6 {
+            margin: 0;
+            padding:0;
+
+            & + .col-6 {
+                margin-left: 5px;
+            }
+        }
 
         .imgNE {
             width: 100%;
-            height: 100%;
+            height: 350px;
             padding: 15px;
             object-fit: cover;
-            border-radius: 5%;
+            border-radius: 7%;
 
         }
     //desktop
@@ -156,6 +175,38 @@ export const Anuncio = styled.div`
         box-shadow: 2px 2px 10px;
         border-radius: 6px;
     }
+`;
+
+export const InfoSemParty = styled.div`
+
+    display: flex;
+    align-items: center;
+    
+    svg {
+        color: white;
+        margin: 20px;
+    }
+
+    div {
+        display: inline;
+        align-items: center;
+        justify-content: center;
+        
+        h1{
+            font-size: 20px;
+            margin: 0;
+            padding:0;
+        }
+        span {
+            color: white;
+        }
+    }
+
+    border: 4px solid;
+    border-radius: 10px;
+    border-color: ${lighten(0.2, '#003399')};
+    background: ${lighten(0.1, '#003399')};
+
 `;
 
 

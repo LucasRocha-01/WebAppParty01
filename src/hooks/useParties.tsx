@@ -12,8 +12,8 @@ interface Party {
     zipcode: string,
     number: string,
     district: string,
-    city: string,
-    state: string,
+    city: string[],
+    state: string[],
     tel: string,
     ticket_link: string,
     banner_link: string,
@@ -95,14 +95,20 @@ export function PartiesProvider({children}: PartiesProviderProps) {
 
     async function removeParty(partyRemove: PartyRemove) {
         
-        const party_slug = slugView;
-        const response = await api.post(`/owner/delete/${party_slug}`,{party_slug})
-        
-        if (response.status === 200) {
-            const {data} = await api.get('/owner');
+        try {
+            const party_slug = slugView;
+            const response = await api.post(`/owner/delete/${party_slug}`,{party_slug})
             
-            setParties(data.parties.data)
-        }       
+            if (response.status === 200) {
+                const {data} = await api.get('/owner');
+                
+                setParties(data.parties.data)
+            }  
+        } catch (error) {
+            console.log('deu ruim ao remover! da uma olhada no hook');
+            
+        }
+        
     }
     async function editParty(partyEditInput: PartyEditInput) {
         

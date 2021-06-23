@@ -70,7 +70,6 @@ export const Container = styled.form`
     }
 
     select {
-        margin-top: 1rem;
         width: 100%;
         padding: 0 1.5rem;
         height: 4rem;
@@ -84,6 +83,11 @@ export const Container = styled.form`
 
         &::placeholder {
             color: var(--text-body)
+        }
+
+
+        & + select {
+            margin-top: 1rem;
         }
 
         & + input {

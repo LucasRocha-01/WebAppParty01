@@ -1,4 +1,5 @@
-import { FormEvent, useState, ChangeEvent, useCallback } from 'react';
+import axios from 'axios';
+import { FormEvent, useState, ChangeEvent, useCallback, useEffect } from 'react';
 import Modal from 'react-modal';
 import {v4 as uuidv4} from 'uuid'
 
@@ -13,6 +14,14 @@ Modal.setAppElement('#root')
 interface NewPartyModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
+}
+
+interface IBGEUFResponse {
+    sigla: string;
+}
+
+interface IBGECityResponse {
+    nome: string;
 }
 
 export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
@@ -31,8 +40,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [zipcode, setZipcode] = useState('');
     const [number, setNumber] = useState('');
     const [district, setDistrict] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
     const [tel, setTel] = useState('');
     const [ticket_link, setTicket_link] = useState('');
     // const [banner_link, setBanner_link] = useState('');
@@ -44,8 +51,43 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [atractions, setAtractions] = useState('');
     const [date_init, setDate_init] = useState('');
     const [date_close, setDate_close] = useState('');
-
     
+    const [city, setCity] = useState<string[]>([]);
+    const [state, setState] = useState<string[]>([]);
+    const [selectedUf, setSelectedUf] = useState("0");
+    const [selectedCity, setSelectedCity] = useState("0");
+    
+    useEffect(() => {
+        axios
+          .get<IBGEUFResponse[]>(
+            "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+          )
+          .then((response) => {
+            const ufInitials = response.data.map((state) => state.sigla);
+            setState(ufInitials);
+          });
+      }, []);
+    
+      useEffect(() => {
+        if (selectedUf === "0") return;
+    
+        axios
+          .get<IBGECityResponse[]>(
+            `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+          )
+          .then((response) => {
+            const cityNames = response.data.map((city) => city.nome);
+            setCity(cityNames);
+          });
+      }, [selectedUf]);
+
+  function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
+    setSelectedUf(event.target.value);
+  }
+
+  function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
+    setSelectedCity(event.target.value);
+  }
 
     const handleChangeBanner = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +98,10 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     );
 
     async function handleCreateNewParty(event: FormEvent, ) {
+
+        setState([selectedUf]);
+        setCity([selectedCity]);
+
         event.preventDefault(); 
 
         const uuid = uuidv4()
@@ -95,8 +141,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setZipcode('');
         setNumber('');
         setDistrict('');
-        setCity('');
-        setState('');
+        setCity([]);
+        setState([]);
         setTel('');
         setTicket_link('');
         // setBanner_link('');
@@ -191,22 +237,38 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 </div>
 
                 <div className="col-6">
-                    
-                    <input placeholder="UF"
-                        value={state}
-                        onChange={event => setState(event.target.value)}
-                        data-ls-module="charCounter" maxLength={2}
-                    
-                    />
+                                       
+                    <select
+                        name="uf"
+                        id="uf"
+                        value={selectedUf}
+                        onChange={handleSelectUf}
+                    >
+                        <option value="0">Selecione uma UF</option>
+                        {state.map((uf) => (
+                        <option key={uf} value={uf}>
+                            {uf}
+                        </option>
+                        ))}
+                    </select>
 
-                    <input placeholder="Distrito"
+                    <select
+                        name="city"
+                        id="city"
+                        value={selectedCity}
+                        onChange={handleSelectCity}
+                    >
+                        <option value="0">Selecione uma Cidade</option>
+                        {city.map((citys) => (
+                        <option key={citys} value={citys}>
+                            {citys}
+                        </option>
+                        ))}
+                    </select>
+
+                    <input placeholder="Bairro"
                         value={district}
                         onChange={event => setDistrict(event.target.value)}
-                    />
-
-                    <input placeholder="Cidade"
-                        value={city}
-                        onChange={event => setCity(event.target.value)}
                     />
 
                     <input placeholder="Telefone"
@@ -235,10 +297,10 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     onChange={event => setTutorial_video_link(event.target.value)}
                 />
 
-                <input placeholder="Presenças"
+                {/* <input placeholder="Presenças"
                     value={presences}
                     onChange={event => setPresences(event.target.value)}
-                />
+                /> */}
 
                 <input placeholder="Seu Tema"
                     value={theme}
@@ -279,7 +341,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
                 
 
-                <button type="submit">
+                <button id="confirmCad" type="submit">
                     Cadastrar
                 </button>
 

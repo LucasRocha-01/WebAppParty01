@@ -2,7 +2,7 @@ import React, {useCallback, useRef} from "react";
 import { FiMail, FiLock, FiUser, FiArrowLeft, FiCalendar } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -33,7 +33,7 @@ const SignUp: React.FC = () => {
     const {addToast} = useToast();
 
     const handleSubmit = useCallback(
-        async (data: SignUpFormData) => { 
+        async (data: SignUpFormData, {reset}) => { 
         try {
             formRef.current?.setErrors({});
 
@@ -43,8 +43,8 @@ const SignUp: React.FC = () => {
                     .required('E-mail obrigatório')
                     .email('Digite um email Válido'),
                 password: Yup.string().min(6, 'No mínimo 6 dígitos'),
-                // // passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
-                // // birthdate: Yup.number().required('Data de Nascimento obrigatório'),
+                // passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
+                birthdate: Yup.string().required('Data de Nascimento obrigatório'),
             });
 
 
@@ -59,7 +59,17 @@ const SignUp: React.FC = () => {
                 remember: true,
             });
 
-            console.log(data);
+            console.log(data);  
+            
+            reset()
+            
+            addToast({
+                type: 'success',
+                title: 'Conta criada com sucesso',
+                description: 'Agora faça login com as informações cadastradas',
+            });
+
+            return (<Redirect to="/"/>);
 
         } catch (err) {
             if (err instanceof Yup.ValidationError) {
@@ -73,11 +83,12 @@ const SignUp: React.FC = () => {
 
             addToast({
                 type: 'error',
-                title: 'erro na autenticação',
-                description: 'ocorreu um erro ao fazer login check as credenciais',
+                title: 'Erro na criação de conta',
+                description: 'ocorreu um erro ao criar a conta, check as credenciais',
             });
              
         }
+        
     },[signUp, addToast]);
         
 

@@ -1,4 +1,5 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import axios from 'axios';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 import CloseImg from '../../../assets/images/close.svg';
@@ -12,6 +13,14 @@ Modal.setAppElement('#root')
 interface NewPartyModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
+}
+
+interface IBGEUFResponse {
+    sigla: string;
+}
+
+interface IBGECityResponse {
+    nome: string;
 }
 
 export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
@@ -33,8 +42,6 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [zipcode, setZipcode]             = useState(`${party[0].zipcode? party[0].zipcode : '' }`);
     const [number, setNumber]               = useState(`${party[0].number? party[0].number : '' }`);
     const [district, setDistrict]           = useState(`${party[0].district? party[0].district : '' }`);
-    const [city, setCity]                   = useState(`${party[0].city? party[0].city : '' }`);
-    const [state, setState]                 = useState(`${party[0].state? party[0].state : '' }`);
     const [tel, setTel]                     = useState(`${party[0].tel? party[0].tel : '' }`);
     const [ticket_link, setTicket_link]     = useState(`${party[0].ticket_link? party[0].ticket_link : '' }`);
     // const [banner_link, setBanner_link]     = useState(`${party[0].banner_link? party[0].banner_link : '' }`);
@@ -47,7 +54,42 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [date_init, setDate_init]         = useState(`${party[0].date_init}`);
     const [date_close, setDate_close]       = useState(`${party[0].date_close}`);
     
-    // const [party_slug, setParty_slug]       = useState(`${party[0].party_slug}`);
+    const [city, setCity] = useState<string[]>([`${party[0].city? party[0].city : '0' }`]);
+    const [state, setState] = useState<string[]>([`${party[0].state? party[0].state : '0' }`]);
+    const [selectedUf, setSelectedUf] = useState("0");
+    const [selectedCity, setSelectedCity] = useState("0");
+    
+    useEffect(() => {
+        axios
+          .get<IBGEUFResponse[]>(
+            "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+          )
+          .then((response) => {
+            const ufInitials = response.data.map((state) => state.sigla);
+            setState(ufInitials);
+          });
+      }, []);
+    
+      useEffect(() => {
+        if (selectedUf === "0") return;
+    
+        axios
+          .get<IBGECityResponse[]>(
+            `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+          )
+          .then((response) => {
+            const cityNames = response.data.map((city) => city.nome);
+            setCity(cityNames);
+          });
+      }, [selectedUf]);
+
+  function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
+    setSelectedUf(event.target.value);
+  }
+
+  function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
+    setSelectedCity(event.target.value);
+  }
 
     const handleChangeBanner = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +100,10 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     );
 
     async function handleEditParty(event: FormEvent) {
+        
+        setState([selectedUf]);
+        setCity([selectedCity]);
+
         event.preventDefault();
 
         await editParty({
@@ -176,19 +222,37 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                 </div>
 
                 <div className="col-6">
-                    <input placeholder="Distrito"
+
+                    <select
+                        name="uf"
+                        id="uf"
+                        value={selectedUf}
+                        onChange={handleSelectUf}
+                    >
+                        <option value="0">Selecione uma UF</option>
+                        {state.map((uf) => (
+                            <option key={uf} value={uf}>
+                            {uf}
+                        </option>
+                        ))}
+                    </select>
+
+                    <select
+                        name="city"
+                        id="city"
+                        value={selectedCity}
+                        onChange={handleSelectCity}
+                    >
+                        <option value="0">Selecione uma Cidade</option>
+                        {city.map((citys) => (
+                        <option key={citys} value={citys}>
+                            {citys}
+                        </option>
+                        ))}
+                    </select>
+                    <input placeholder="Bairro"
                         value={district}
                         onChange={event => setDistrict(event.target.value)}
-                    />
-
-                    <input placeholder="Cidade"
-                        value={city}
-                        onChange={event => setCity(event.target.value)}
-                    />
-
-                    <input placeholder="Estado"
-                        value={state}
-                        onChange={event => setState(event.target.value)}
                     />
 
                     <input placeholder="Telefone"
