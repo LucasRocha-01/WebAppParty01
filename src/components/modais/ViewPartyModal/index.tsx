@@ -88,9 +88,15 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                         <img src={party.banner_link? party.banner_link : imgBanner} alt={party.name} />
                         
                         <div className="row">
-                            <div className="col-6">
                                 <span>Nome Evento:</span>
                                 <h2>{party.name}</h2>
+
+                                <span>Descrição:</span>
+                                <h2>{party.description}</h2>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-6">
 
                                 {/* <span className="partySlug">party_slug:</span>
                                 <a href={party.party_slug}>{party.party_slug}</a>

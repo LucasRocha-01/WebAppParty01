@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+
 import { NewPartyModal } from '../../components/modais/NewPartyModal';
 import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
 // import { NewPartyModalcopy } from '../../components/modais/NewPartyModalcopy';
@@ -17,9 +21,9 @@ import imgPB from "../../assets/images/patternbanner.jpg";
 import AnuncioImg from "../../assets/images/Banner-vertical.gif";
 
 import { HeaderView } from "../../styles/globalStyles";
-import { Button } from "../../styles/globalStyles"
+import { Button as B2 } from "../../styles/globalStyles"
 
-import { FiInfo, FiPower } from 'react-icons/fi';
+import { FiInfo, FiPower, FiAlignJustify } from 'react-icons/fi';
 import Footer from '../../components/Footer';
 
 // interface DashboardProps {
@@ -52,17 +56,48 @@ import Footer from '../../components/Footer';
 
     partiesSorted.sort((a,b) => (a.date_init > b.date_init) ? 1:-1);
     
-    console.log(users);
+    // console.log(users);
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleClose = () => {
+        setAnchorEl(null);
+      };
+      
+      const handleClick = (event: any) => {
+        setAnchorEl(event.currentTarget);
+      };
     return(
         <>
             <HeaderView>    
                 <div>
                     <img alt="test" className="item logo" src={logoImg}/>
-                    {users[0].name}
-                    <button onClick={handleSignOut} >
+                    
+                    
+                    <div className="menuReact">
+                            <Button
+                                aria-controls="simple-menu"
+                                aria-haspopup="true"
+                                onClick={handleClick}
+                            >
+                                <FiAlignJustify />
+                            </Button>
+                            <Menu
+                                keepMounted
+                                anchorEl={anchorEl}
+                                onClose={handleClose}
+                                open={Boolean(anchorEl)}
+                            >
+                                {/* <MenuItem onClick={handleClose}>My Account</MenuItem>
+                                <MenuItem onClick={handleClose}>Settings</MenuItem>
+                                <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                                <MenuItem onClick={handleSignOut}>Sair</MenuItem>
+                            </Menu>
+                            </div>
+
+
+                    {/* <button onClick={handleSignOut} >
                         <FiPower />
-                    </button>
+                    </button> */}
                 </div>  
 
 
@@ -162,9 +197,9 @@ import Footer from '../../components/Footer';
                     )}    
                 </BoxContent>
                 
-                <Button className="btnAddParty" onClick={handleOpenNewPartyModal}>
+                <B2 className="btnAddParty" onClick={handleOpenNewPartyModal}>
                     Nova Festa
-                </Button>
+                </B2>
 
                 <Anuncio className="adsParty">
                     <img src={AnuncioImg} alt="anuncio" />

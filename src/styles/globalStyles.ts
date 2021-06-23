@@ -201,6 +201,19 @@ export const Button = styled.button`
 
 export const HeaderView = styled.div`
 
+    .menuReact {
+        display: flex;
+        width: 60px;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+
+         svg {
+             padding:0;
+             margin: 0;
+         }
+    }
     display: flex;
     align-items: center;
     justify-content: center;

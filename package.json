@@ -4,6 +4,7 @@
   "proxy": "https://apparty-api-owners.herokuapp.com",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "axios": "^0.21.1",

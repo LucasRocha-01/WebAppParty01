@@ -53,8 +53,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [date_init, setDate_init] = useState('');
     const [date_close, setDate_close] = useState('');
 
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
     
     const [city, setCity] = useState<string[]>([]);
     const [state, setState] = useState<string[]>([]);
@@ -108,17 +108,23 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     //     }
     // );
 
-    function handleLat(event: ChangeEvent<HTMLInputElement>) {
-        const lat = event.target.value
+    // function handleLat(event: ChangeEvent<HTMLInputElement>) {
+    //     const lat = event.target.value
         
-        setLatitude(parseFloat(lat));
-      }
+    //     setLatitude(parseFloat(lat));
+    //   }
 
-    function handleLong(event: ChangeEvent<HTMLInputElement>) {
-        const long = event.target.value
+    // function handleLong(event: ChangeEvent<HTMLInputElement>) {
+    //     const long = event.target.value
         
-        setLongitude(parseFloat(long));
-      }
+    //     setLongitude(parseFloat(long));
+    //   }
+
+    // function handleLGBT(event: ChangeEvent<HTMLInputElement>) {
+    //     const lgbt = event.target.value = false ? "Livre" : "LGBTQIA+"
+        
+    //     setType_event(lgbt);
+    //   }
 
     const handleChangeBanner = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -144,7 +150,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
 
         console.log(latitude);
         console.log(longitude);
-        
+
 
         await createParty({
    
@@ -180,8 +186,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setZipcode('');
         setNumber('');
         setDistrict('');
-        setLatitude(0);
-        setLongitude(0);
+        setLatitude('');
+        setLongitude('');
         setCity([]);
         setState([]);
         setTel('');
@@ -271,7 +277,10 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         <input
                             type="checkbox" 
                             value={type_event}
-                            onChange={event => setType_event(event.target.value)}
+                            onChange={
+                                event => setType_event(event.target.value)
+                                // handleLGBT
+                            }
                         />
                     </label>
                 </div>
@@ -326,8 +335,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input 
                         placeholder="Latitude" 
                         type="text"
-                        // value=""
-                        onChange={handleLat}
+                        value={latitude}
+                        onChange={event => setLatitude(event.target.value)}
                     />
                 </label>
 
@@ -335,8 +344,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input 
                         placeholder="Longitude" 
                         type="text"
-                        // value=""
-                        onChange={handleLong}
+                        value={longitude}
+                        onChange={event => setLongitude(event.target.value)}
                     />
                 </label>
 
