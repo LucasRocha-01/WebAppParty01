@@ -48,11 +48,13 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [banner_link2, setBanner_link2]     = useState({});
     const [tutorial_video_link, setTutorial_video_link] = useState(`${party[0].tutorial_video_link? party[0].tutorial_video_link : '' }`);
     const [point_of_reference, setPoint_of_reference] = useState(`${party[0].point_of_reference? party[0].point_of_reference : '' }`);
-    const [presences, setPresences]         = useState(`${party[0].presences? party[0].presences : '' }`);
     const [theme, setTheme]                 = useState(`${party[0].theme? party[0].theme : '' }`);
     const [atractions, setAtractions]       = useState(`${party[0].atractions? party[0].atractions : '' }`);
     const [date_init, setDate_init]         = useState(`${party[0].date_init}`);
     const [date_close, setDate_close]       = useState(`${party[0].date_close}`);
+    
+    const [latitude, setLatitude]           = useState(`${party[0].latitude? party[0].latitude : ''}`);
+    const [longitude, setLongitude]         = useState(`${party[0].longitude? party[0].longitude : ''}`);
     
     const [city, setCity] =     useState<string[]>([`${party[0].city? party[0].city : '0' }`]);
     const [state, setState] =   useState<string[]>([`${party[0].state? party[0].state : '0' }`]);
@@ -117,6 +119,8 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             number,
             district,
             city,
+            latitude,
+            longitude,
             state,
             tel,
             ticket_link,
@@ -124,7 +128,6 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             banner_link2,
             tutorial_video_link,
             point_of_reference,
-            presences,
             theme,
             atractions,
             date_init,
@@ -261,7 +264,17 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     />
                 </div>
 
-                
+                <label>
+                    <input placeholder="Longitude" 
+                        value={longitude}
+                        onChange={event => setLongitude(event.target.value)}
+                    />
+
+                    <input placeholder="Latitude" 
+                        value={latitude}
+                        onChange={event => setLatitude(event.target.value)}
+                    />
+                </label>
 
                 <input placeholder="Link de venda de Tickets"
                     value={ticket_link}
@@ -280,11 +293,6 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     onChange={event => setTutorial_video_link(event.target.value)}
                 />
 
-                <input placeholder="Presenças"
-                    value={presences}
-                    onChange={event => setPresences(event.target.value)}
-                />
-
                 <input placeholder="Seu Tema"
                     value={theme}
                     onChange={event => setTheme(event.target.value)}
@@ -301,21 +309,21 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     <input  
                         className="dataHour"
                         placeholder="Data de Término"
-                        value={date_close}
+                        value={date_init}
                         type="datetime-local"
-                        onChange={event => setDate_close(event.target.value)}
-                    />
+                        onChange={event => setDate_init(event.target.value)}
+                        />
                 </label>
 
                 <label
                     className="dataHour"
-                > Termino do Evento:
+                    > Termino do Evento:
                     <input 
                         className="dataHour"
                         placeholder="Data de Início"
-                        // value={date_init}
+                        value={date_close}
                         type="datetime-local"
-                        onChange={event => setDate_init(event.target.value)}
+                        onChange={event => setDate_close(event.target.value)}
                     />
                 </label>
                 

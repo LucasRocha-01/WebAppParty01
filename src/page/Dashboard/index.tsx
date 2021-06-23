@@ -6,7 +6,7 @@ import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
 
 import { useParties } from "../../hooks/useParties";
 import { useAuth } from "../../hooks/AuthContext";
-// import { useUsers } from '../../hooks/useUser';
+import { useUsers } from '../../hooks/useUser';
 
 import { Container, BoxContent, NextEvent, Anuncio, InfoSemParty } from "./styles";
 import {BoxParty} from "../../components/BoxParty";
@@ -29,7 +29,7 @@ import Footer from '../../components/Footer';
 
  const Dashboard: React.FC = () => {
     const {parties, setSlugView} = useParties()
-    // const { users } = useUsers();
+    const { users } = useUsers();
 
     
     const { signOut } = useAuth();
@@ -52,16 +52,15 @@ import Footer from '../../components/Footer';
 
     partiesSorted.sort((a,b) => (a.date_init > b.date_init) ? 1:-1);
     
-    ;
+    console.log(users);
+    
 
     return(
         <>
             <HeaderView>    
                 <div>
-                    
                     <img alt="test" className="item logo" src={logoImg}/>
-                    
-
+                    {/* <h1>Seja Bem Vinde, {users.user.name}</h1> */}
                     <button onClick={handleSignOut} >
                         <FiPower />
                     </button>
@@ -82,7 +81,6 @@ import Footer from '../../components/Footer';
                             <span>Suas festas apareceram aqui!</span>
                         </div>
                     </InfoSemParty>
-                    
                     
                     :
                     
@@ -120,16 +118,8 @@ import Footer from '../../components/Footer';
                                     <div className="col-6">
                                         <h1>Início:</h1>
                                         <h2>
-                                            {
-                                                new Date(party.date_init).getUTCDate()+'/'+
-                                                new Date(party.date_init).getUTCMonth()+'/'+
-                                                new Date(party.date_init).getUTCFullYear()
-                                            }
-                                                {' às '}
-                                            {
-                                                new Date(party.date_init).getUTCHours()+':'+
-                                                new Date(party.date_init).getUTCMinutes()+'H'
-                                            }
+                                        {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'short'}).format(
+                                        new Date(party.date_init))+'H'}
                                         </h2>
                                     </div>
                                 </div>
@@ -137,16 +127,8 @@ import Footer from '../../components/Footer';
                                     <div className="col-6">
                                         <h1>Termino:</h1>
                                         <h2>
-                                            {
-                                                new Date(party.date_close).getUTCDate()+'/'+
-                                                new Date(party.date_close).getUTCMonth()+'/'+
-                                                new Date(party.date_close).getUTCFullYear()
-                                            }
-                                                {' às '}
-                                            {
-                                                new Date(party.date_close).getUTCHours()+':'+
-                                                new Date(party.date_close).getUTCMinutes()+'H'
-                                            }
+                                        {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'short'}).format(
+                                        new Date(party.date_close))+'H'}
                                         </h2>
                                     </div>
                                 </div>

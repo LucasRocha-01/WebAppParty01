@@ -14,13 +14,14 @@ interface Party {
     district: string,
     city: string[],
     state: string[],
+    latitude: string,
+    longitude: string,
     tel: string,
     ticket_link: string,
     banner_link: string,
     banner_link2: any,
     tutorial_video_link: string,
     point_of_reference: string,
-    presences: string,
     theme: string,
     atractions: string,
     date_init: string,
@@ -44,7 +45,6 @@ interface PartiesContextData {
     editParty: (party: PartyEditInput) => Promise<void>;
     removeParty: any;
 }
-
 
 export const PartiesContext = createContext<PartiesContextData>(
     {} as PartiesContextData
@@ -138,8 +138,6 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             
         setParties(data.parties.data)
     }
-
-
 
 
 

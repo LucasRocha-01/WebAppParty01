@@ -106,6 +106,9 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 <span>CEP:</span>
                                 <h2>{party.zipcode}</h2>
                                 
+                                <span>Slug:</span>
+                                <h2>{party.party_slug}</h2>
+                                
                                 <span>Numero:</span>
                                 <h2>{party.number}</h2>
                                 
@@ -133,7 +136,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 <h2>{party.point_of_reference}</h2>
                                 
                                 <span>Presenças:</span>
-                                <h2>{party.presences}</h2>
+                                {/* <h2>{party.presences}</h2> */}
                                 
                                 <span>Tema da Festa:</span>
                                 <h2>{party.theme}</h2>
@@ -147,31 +150,15 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                             <div className="col-6">
                                 <span>Início do Evento:</span>
                                 <h2>
-                                    {
-                                        new Date(party.date_init).getUTCDate()+'/'+
-                                        new Date(party.date_init).getUTCMonth()+'/'+
-                                        new Date(party.date_init).getUTCFullYear()
-                                    }
-                                        {' às '}
-                                    {
-                                        new Date(party.date_init).getUTCHours()+':'+
-                                        new Date(party.date_init).getUTCMinutes()+'H'
-                                    }
+                                {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'medium'}).format(
+                                        new Date(party.date_init))}
                                 </h2>
                             </div>
                             <div className="col-6">        
                                 <span>Término do Evento:</span>
                                 <h2>
-                                    {
-                                        new Date(party.date_close).getUTCDate()+'/'+
-                                        new Date(party.date_close).getUTCMonth()+'/'+
-                                        new Date(party.date_close).getUTCFullYear()
-                                    }
-                                        {' às '}
-                                    {
-                                        new Date(party.date_close).getUTCHours()+':'+
-                                        new Date(party.date_close).getUTCMinutes()+'H'
-                                    }
+                                {new Intl.DateTimeFormat('pt-BR',  {dateStyle: 'short', timeStyle: 'medium'}).format(
+                                        new Date(party.date_close))}
                                 </h2>
                             </div>
                         </div>

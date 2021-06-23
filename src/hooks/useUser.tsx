@@ -2,16 +2,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import api from '../services/api';
 
 interface User {
-    id: number,
-    name: string,
-    email: string,
-    password: string,
-    avatar: string,
-    bio: string,
-    birthdate: string,
-    presences: string,
-    created_at: string,
-    updated_at: string
+    user: any
 }
 
 interface UsersProviderProps {
@@ -19,7 +10,7 @@ interface UsersProviderProps {
 }
 
 interface UsersContextData {
-    users: User[];
+    users: any;
 }
 
 export const UsersContext = createContext<UsersContextData>(
@@ -27,7 +18,7 @@ export const UsersContext = createContext<UsersContextData>(
     );
 
 export function UsersProvider({children}: UsersProviderProps) {
-    const [users, setUsers] = useState<User[]>([]);
+    const [users, setUsers] = useState<User>();
 
     useEffect(() => {
         api.get('/owner/profile')

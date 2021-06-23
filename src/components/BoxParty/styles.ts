@@ -56,10 +56,10 @@ export const ContentBP = styled.div`
         color: var(--text-light);
         font-size: 12px;
 
-        grid-template-columns: 1fr 1fr 2fr 1fr;
+        grid-template-columns: 1fr 4fr 2fr;
         grid-template-areas:
-        "logo   nameParty   nameParty   dateInit"
-        "logo   typeParty   typeParty   dateClose"
+        "logo   nameParty   dateInit"
+        "logo   typeParty   dateClose"
         ;
     
 

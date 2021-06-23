@@ -1,10 +1,12 @@
-import axios from 'axios';
 import { FormEvent, useState, ChangeEvent, useCallback, useEffect } from 'react';
+import axios from 'axios';
 import Modal from 'react-modal';
 import {v4 as uuidv4} from 'uuid'
+// import Geocode from "react-geocode";
 
 import CloseImg from '../../../assets/images/close.svg';
 import { useParties } from '../../../hooks/useParties';
+
 
 import { Container } from './styles';
 // import GlobalStyle from '../../styles/globalStyles'
@@ -46,11 +48,13 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [banner_link2, setBanner_link2] = useState({});
     const [tutorial_video_link, setTutorial_video_link] = useState('');
     const [point_of_reference, setPoint_of_reference] = useState('');
-    const [presences, setPresences] = useState('');
     const [theme, setTheme] = useState('');
     const [atractions, setAtractions] = useState('');
     const [date_init, setDate_init] = useState('');
     const [date_close, setDate_close] = useState('');
+
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
     
     const [city, setCity] = useState<string[]>([]);
     const [state, setState] = useState<string[]>([]);
@@ -89,6 +93,23 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     setSelectedCity(event.target.value);
   }
 
+    // Geocode.setApiKey("AIzaSyA5nmky0ZVIVUbehhxByaopCnCMOzJ9Bf0");
+    // Geocode.setLanguage("pt-BR");
+    // Geocode.setRegion("br");
+    // Geocode.enableDebug();
+
+    // Geocode.fromAddress("Eiffel Tower").then(
+    //     (response) => {
+    //     const { lat, lng } = response.results[0].geometry.location;
+    //     console.log(lat, lng);
+    //     },
+    //     (error) => {
+    //     console.error(error);
+    //     }
+    // );
+
+
+
     const handleChangeBanner = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             if (e.target.files) {               
@@ -118,13 +139,14 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
             zipcode,
             number,
             district,
+            latitude,
+            longitude,
             city,
             state,
             tel,
             ticket_link,
             tutorial_video_link,
             point_of_reference,
-            presences,
             theme,
             atractions,
             date_init,
@@ -141,6 +163,8 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setZipcode('');
         setNumber('');
         setDistrict('');
+        setLatitude('');
+        setLongitude('');
         setCity([]);
         setState([]);
         setTel('');
@@ -149,7 +173,6 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
         setBanner_link2('');
         setTutorial_video_link('');
         setPoint_of_reference('');
-        setPresences('');
         setTheme('');
         setAtractions('');
         setDate_init('');
@@ -221,19 +244,19 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         type="number"
                     />
                         
-                        <input placeholder="Ponto de Referencia"
-                            value={point_of_reference}
-                            onChange={event => setPoint_of_reference(event.target.value)}
-                        />
+                    <input placeholder="Ponto de Referencia"
+                        value={point_of_reference}
+                        onChange={event => setPoint_of_reference(event.target.value)}
+                    />
 
-                        <label>
-                            <p>Evento LGBTQIA+?</p>
-                            <input
-                                type="checkbox" 
-                                value={type_event}
-                                onChange={event => setType_event(event.target.value)}
-                            />
-                        </label>
+                    <label>
+                        <p>Evento LGBTQIA+?</p>
+                        <input
+                            type="checkbox" 
+                            value={type_event}
+                            onChange={event => setType_event(event.target.value)}
+                        />
+                    </label>
                 </div>
 
                 <div className="col-6">
@@ -278,7 +301,18 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                     />
                 </div>
 
-                
+                <label>
+                    <input placeholder="Longitude" 
+                        value={longitude}
+                        onChange={event => setLongitude(event.target.value)}
+                    />
+
+                    <input placeholder="Latitude" 
+                        value={latitude}
+                        onChange={event => setLatitude(event.target.value)}
+                    />
+
+                </label>
 
                 <input placeholder="Link de venda de Tickets"
                     value={ticket_link}
