@@ -6,6 +6,7 @@ import Menu from "@material-ui/core/Menu";
 
 import { NewPartyModal } from '../../components/modais/NewPartyModal';
 import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
+import { EditUser } from '../../components/modais/EditUser';
 // import { NewPartyModalcopy } from '../../components/modais/NewPartyModalcopy';
 
 import { useParties } from "../../hooks/useParties";
@@ -23,7 +24,7 @@ import AnuncioImg from "../../assets/images/Banner-vertical.gif";
 import { HeaderView } from "../../styles/globalStyles";
 import { Button as B2 } from "../../styles/globalStyles"
 
-import { FiInfo, FiPower, FiAlignJustify } from 'react-icons/fi';
+import { FiInfo, FiAlignJustify } from 'react-icons/fi';
 import Footer from '../../components/Footer';
 
 // interface DashboardProps {
@@ -31,7 +32,34 @@ import Footer from '../../components/Footer';
 //     onOpenViewPartyModal: () => void;
 // }
 
- const Dashboard: React.FC = () => {
+// interface User {
+//     id: number,
+//     name: string,
+//     email: string,
+//     password: string,
+//     avatar: string,
+//     bio: string,
+//     birthdate: string,
+//     presences: string,
+//     created_at: string,
+//     updated_at: string
+// }
+
+// interface UserT {
+//     user: User;
+// }
+
+const Dashboard: React.FC = () => {
+    
+    // const [users, setUsers] = useState<UserT>();
+    
+    //    useEffect(() => {
+    //        api.get('/owner/profile')
+    //        .then((response => setUsers(response.data)))
+    //    },[]) 
+    //    console.log(users?.user.name);
+    
+
     const {parties, setSlugView} = useParties()
     const { users } = useUsers();
 
@@ -41,14 +69,16 @@ import Footer from '../../components/Footer';
     function handleSignOut() { signOut(); }
     
     const [isNewPartyModalOpen, setIsNewPartyModalOpen] = useState(false);
-
     function handleOpenNewPartyModal() {setIsNewPartyModalOpen(true);}
     function handleClosedNewPartyModal() {setIsNewPartyModalOpen(false);}
     
     const [isViewPartyModalOpen, setIsViewPartyModalOpen] = useState(false);
-
     function handleOpenViewPartyModal() {setIsViewPartyModalOpen(true);}
     function handleClosedViewPartyModal() {setIsViewPartyModalOpen(false);}
+    
+    const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
+    function handleOpenEditUserModal() {setIsEditUserModalOpen(true);}
+    function handleClosedEditUserModal() {setIsEditUserModalOpen(false);}
 
     // const copyParties = [...parties]
     const partiesSorted = [...parties]
@@ -56,8 +86,6 @@ import Footer from '../../components/Footer';
 
     partiesSorted.sort((a,b) => (a.date_init > b.date_init) ? 1:-1);
     
-    // console.log(users);
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClose = () => {
         setAnchorEl(null);
@@ -72,6 +100,7 @@ import Footer from '../../components/Footer';
                 <div>
                     <img alt="test" className="item logo" src={logoImg}/>
                     
+                    {/* <h1>{users?.user.name}</h1> */}
                     
                     <div className="menuReact">
                             <Button
@@ -87,9 +116,9 @@ import Footer from '../../components/Footer';
                                 onClose={handleClose}
                                 open={Boolean(anchorEl)}
                             >
-                                {/* <MenuItem onClick={handleClose}>My Account</MenuItem>
-                                <MenuItem onClick={handleClose}>Settings</MenuItem>
-                                <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                                {/* <MenuItem onClick={handleClose}>My Account</MenuItem> */}
+                                {/* <MenuItem onClick={handleClose}>Settings</MenuItem> */}
+                                <MenuItem onClick={handleOpenEditUserModal}>User</MenuItem>
                                 <MenuItem onClick={handleSignOut}>Sair</MenuItem>
                             </Menu>
                             </div>
@@ -209,7 +238,7 @@ import Footer from '../../components/Footer';
 
             <NewPartyModal  isOpen={isNewPartyModalOpen}    onRequestClose={handleClosedNewPartyModal} />
             <ViewPartyModal isOpen={isViewPartyModalOpen}   onRequestClose={handleClosedViewPartyModal} />
-            {/* <NewPartyModalcopy isOpen={isNewPartyModalOpen}   onRequestClose={handleClosedNewPartyModal} /> */}
+            <EditUser       isOpen={isEditUserModalOpen}    onRequestClose={handleClosedEditUserModal} />
 
             <Footer />
         </>

@@ -17,12 +17,12 @@ export function App() {
     return (
         <Router>
             <AppProvider>
-                <UsersProvider>
                     <PartiesProvider>
+                <UsersProvider>
                         <Routes />
                         <GlobalStyle />                
-                    </PartiesProvider>
                 </UsersProvider>
+                    </PartiesProvider>
             </AppProvider>
         </Router>
     )

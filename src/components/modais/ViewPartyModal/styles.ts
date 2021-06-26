@@ -5,6 +5,10 @@ export const Container = styled.div`
     .row {
         margin: 20px;
     }
+    .title {
+        margin-left: 35px;
+        justify-content: center;    
+    }
 
     .col-6 {
         width: 50%;

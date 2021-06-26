@@ -43,7 +43,7 @@ interface PartiesContextData {
     slugView: string,
     createParty: (party: PartyInput ) => Promise<void>;
     setSlugView: (slugView:string   ) => void;
-    editParty: (party: PartyEditInput) => Promise<void>;
+    editParty:   (party: PartyEditInput) => Promise<void>;
     removeParty: any;
 }
 
@@ -72,7 +72,7 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             createdAt: new Date(),
         })
         
-        if (response.status === 200) {
+        if (response.data.upload_info.status === true) {
             const {data} = await api.get('/owner');
             
             setParties(data.parties.data);

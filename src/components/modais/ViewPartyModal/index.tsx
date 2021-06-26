@@ -87,7 +87,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                     <div key={party.party_slug}>
                         <img src={party.banner_link? party.banner_link : imgBanner} alt={party.name} />
                         
-                        <div className="row">
+                        <div className="row title">
                                 <span>Nome Evento:</span>
                                 <h2>{party.name}</h2>
 
@@ -103,40 +103,39 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 <h2>{party.party_slug}</h2> */}
                                 
 
-                                <span>LGBT?:
-                                <h2>{party.type_event === 'true' ? 'true' : 'false'}</h2>
-                                </span>
                                 <span>Endereço:</span>
                                 <h2>{party.address}</h2>
                                 
+                                <span>Numero:</span>
+                                <h2>{party.number}</h2>
+
                                 <span>CEP:</span>
                                 <h2>{party.zipcode}</h2>
                                 
-                                <span>Slug:</span>
-                                <h2>{party.party_slug}</h2>
-                                
-                                <span>Numero:</span>
-                                <h2>{party.number}</h2>
+                                {/* <span>Slug:</span>
+                                <h2>{party.party_slug}</h2> */}
+
+                                <span>Estado:</span>
+                                <h2>{party.state}</h2>
                                 
                                 <span>Bairro:</span>
                                 <h2>{party.district}</h2>
                                 
                                 <span>Cidade:</span>
                                 <h2>{party.city}</h2>
+                                
                             </div>
 
                             <div className="col-6">
-                                <span>Estado:</span>
-                                <h2>{party.state}</h2>
                                 
                                 <span>Telefone:</span>
                                 <h2>{party.tel}</h2>
                                 
                                 <span>Link de Compra Ingresso:</span>
-                                <h2>{party.ticket_link}</h2>
+                                <h2>{party.ticket_link != null ? <a href={party.ticket_link}>Link da compra</a> : 'Sem Ticket' }</h2>
                                 
                                 <span>Video da Festa:</span>
-                                <h2>{party.tutorial_video_link}</h2>
+                                <h2>{party.tutorial_video_link != null ? <a href={party.tutorial_video_link}>Link do Vídeo</a> : 'Sem vídeo' }</h2>
                                 
                                 <span>Ponto de Referencia:</span>
                                 <h2>{party.point_of_reference}</h2>
@@ -150,14 +149,28 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
                                 <span>Atrações:</span>
                                 <h2>{party.atractions}</h2>
                                 
-                                <span>Latitude:</span>
-                                <h2>{party.latitude}</h2>
-                                
-                                <span>Longitude:</span>
-                                <h2>{party.longitude}</h2>
+                                <span>LGBT?:
+                                <h2>{party.type_event === 'true' ? 'true' : 'false'}</h2>
+                                </span>
 
                             </div>
                         </div>
+
+                        <div className="row">
+                            
+                        </div>     
+
+                        <div className="row">
+                            <div className="col-6">
+                            <span>Latitude:</span>
+                                <h2>{party.latitude}</h2>
+                            </div>
+                            <div className="col-6">
+                            <span>Longitude:</span>
+                                <h2>{party.longitude}</h2>
+                            </div>
+                        </div>
+
                         <div className="row">
                             <div className="col-6">
                                 <span>Início do Evento:</span>
