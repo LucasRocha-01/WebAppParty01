@@ -72,7 +72,7 @@ export function PartiesProvider({children}: PartiesProviderProps) {
             createdAt: new Date(),
         })
         
-        if (response.data.upload_info.status === true) {
+        if (response.status === 200) {
             const {data} = await api.get('/owner');
             
             setParties(data.parties.data);

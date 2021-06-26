@@ -2,7 +2,7 @@ import { shade } from "polished";
 import styled from "styled-components";
 
 export const Container = styled.form`
-    
+
     overflow: scroll;
     height: 80vh;
 
@@ -14,26 +14,25 @@ export const Container = styled.form`
     }
 
     .avatarInput {
-        margin-top: -50px;
-        margin-left: 150px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+       
 
-        
-        background: #87CEFA;
-        border-radius: 50%;
-        padding: 0;
-        width: 4rem;
-        cursor: pointer;
-        transition: background-color 0.2s;
+        width: 100%;
+        padding: 0 1.5rem;
+        height: 4rem;
+        border-radius: 0.25rem;
 
-        :hover {
-            background: ${shade(0.2, '#87CEFA')};
+        border: 1px solid #d7d7d7;
+        background: #e7e9ee;
+
+        font-weight: 400;
+        font-size: 1rem;
+
+        &::placeholder {
+            color: var(--text-body)
         }
 
-        input {
-            display: none;
+        & + input {
+            margin-top: 1rem;
         }
     }
 

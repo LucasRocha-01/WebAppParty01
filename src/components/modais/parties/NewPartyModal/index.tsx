@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import {v4 as uuidv4} from 'uuid'
 // import Geocode from "react-geocode";
 
-import CloseImg from '../../../assets/images/close.svg';
-import { useParties } from '../../../hooks/useParties';
+import CloseImg from '../../../../assets/images/close.svg';
+import { useParties } from '../../../../hooks/useParties';
 
 
 import { Container } from './styles';
@@ -60,6 +60,9 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [state, setState] = useState<string[]>([]);
     const [selectedUf, setSelectedUf] = useState("0");
     const [selectedCity, setSelectedCity] = useState("0");
+
+    const todayDate = new Date();
+    const todayString = todayDate.toString()
     
     useEffect(() => {
         axios
@@ -392,6 +395,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                             value={date_init}
                             type="datetime-local"
                             required={true}
+                            min={todayString}
                             onChange={event => setDate_init(event.target.value)}
                         />
                 </label>
@@ -405,6 +409,7 @@ export function NewPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                             value={date_close}
                             type="datetime-local"
                             required={true}
+                            min={date_init}
                             onChange={event => setDate_close(event.target.value)}
                         />
                 </label>

@@ -1,13 +1,13 @@
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import Modal from 'react-modal';
 
-import CloseImg from '../../../assets/images/close.svg';
-import { useToast } from '../../../hooks/toast';
-import { useUsers } from '../../../hooks/useUser';
-import avatarImg from '../../../assets/images/avatar.jpeg';
+import { useToast } from '../../../../hooks/toast';
+import { useUsers } from '../../../../hooks/useUser';
+import avatarImg from '../../../../assets/images/avatar.jpeg';
 
 import { Container } from './styles';
-import { FiCamera } from 'react-icons/fi';
+import { FiCamera, FiTrash, FiX } from 'react-icons/fi';
+import { TiPencil } from 'react-icons/ti';
 
 Modal.setAppElement('#root')
 
@@ -20,15 +20,15 @@ export function EditUser({isOpen, onRequestClose}: NewPartyModalProps) {
     const { users, editUser } = useUsers();
     const { addToast } = useToast();
 
-    console.log(users?.user.name);
+    console.log(users?.user);
     
-    const [name, setName]       = useState(`${users?.user.name? users.user.name : ''}`); 
-    const [avatar, setAvatar]   = useState(users?.user.avatar? users.user.avatar : {}); 
-    const [bio, setBio]         = useState(`${users?.user.bio? users.user.bio : ''}`); 
+    const [name, setName]       = useState(`${users ? users.user.name : ''}`); 
+    const [avatar, setAvatar]   = useState(users ? users.user.avatar : {}); 
+    const [bio, setBio]         = useState(`${users ? users.user.bio : ''}`); 
 
     const handleChangeAvatar = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
-            if (e.target.files) {
+            if (e.target.files) { 
                 setAvatar(e.target.files[0])
             }
         },[]
@@ -59,26 +59,28 @@ export function EditUser({isOpen, onRequestClose}: NewPartyModalProps) {
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             overlayClassName ="react-modal-overlay"
-            className="react-modal-content"
+            className="react-modal-content modsUser"
             >
 
-            <button 
-                type="button" 
-                onClick={onRequestClose} 
-                className="react-modal-close"> 
+<div className="react-modalView-menu">
+    
+                
+                <button 
+                    type="button" 
+                    onClick={onRequestClose} 
+                    // className="react-modalView-menu"
+                    > 
+                    <FiX/>
+                </button>
 
-                <img src={CloseImg} alt="Fechar modal" />
-            </button>
+
+            </div>
 
             <Container 
                 onSubmit={handleEditUser}> 
 
-            <h2 className="titulo">Perfil</h2>
-                
+            <h2 className="titulo">Editar Perfil</h2>
 
-                <div className="avatarImg">
-                    <img src={users?.user.avatar ? users.user.avatar : avatarImg} alt="avatar" />
-                </div>
                 
                 <div className="imgBorder">
                     <label className="avatarInput">
@@ -86,7 +88,6 @@ export function EditUser({isOpen, onRequestClose}: NewPartyModalProps) {
                             type="file" 
                             onChange={handleChangeAvatar}
                         />
-                        <FiCamera />
                     </label>
                 </div>
 

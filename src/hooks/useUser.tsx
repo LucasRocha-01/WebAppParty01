@@ -41,8 +41,7 @@ export function UsersProvider({children}: UsersProviderProps) {
 
     async function editUser(userEditInput: UserEditInput) {
         
-        const response = 
-        await api.post(`owner/profile/edit`, {
+        const response = await api.post(`owner/profile/edit`, {
             ...userEditInput, 
         })
         

@@ -5,10 +5,11 @@ import { TiPencil } from 'react-icons/ti';
 import Modal from 'react-modal';
 
 import { EditPartyModal } from '../EditPartyModal';
+import { DellPartyModal } from '../DellpartyModal';
 
-import imgBanner from '../../../assets/images/patternbanner.jpg';
+import imgBanner from '../../../../assets/images/patternbanner.jpg';
 
-import { useParties } from '../../../hooks/useParties';
+import { useParties } from '../../../../hooks/useParties';
 
 import { Container } from './styles';
 
@@ -32,7 +33,8 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
     const {removeParty, parties, slugView} = useParties()
 
     const party_slug = slugView;
-        function handleRemoveParty() {
+
+    function handleRemoveParty() {
         console.log('teste')
 
         removeParty(
@@ -46,7 +48,11 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
     function handleOpenEditPartyModal() {setIsEditPartyModalOpen(true);}
     function handleClosedEditPartyModal() {setIsEditPartyModalOpen(false);}
     
+    const [isDellPartyModalOpen, setIsDellPartyModalOpen] = useState(false);
 
+    function handleOpenDellPartyModal() {setIsDellPartyModalOpen(true);}
+    function handleClosedDellPartyModal() {setIsDellPartyModalOpen(false);}
+    
     return (
         <Modal 
             isOpen={isOpen}
@@ -193,6 +199,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
             </Container>
 
             <EditPartyModal  isOpen={isEditPartyModalOpen}    onRequestClose={handleClosedEditPartyModal} />
+            <DellPartyModal  isOpen={isDellPartyModalOpen}    onRequestClose={handleClosedDellPartyModal} />
         </Modal>
     )
 }

@@ -2,8 +2,8 @@ import axios from 'axios';
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-import CloseImg from '../../../assets/images/close.svg';
-import { useParties } from '../../../hooks/useParties';
+import CloseImg from '../../../../assets/images/close.svg';
+import { useParties } from '../../../../hooks/useParties';
 
 import { Container } from './styles';
 // import GlobalStyle from '../../styles/globalStyles'
@@ -60,7 +60,10 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
     const [state, setState] =   useState<string[]>([`${party[0].state? party[0].state : '0' }`]);
     const [selectedCity, setSelectedCity] = useState(`${party[0].city? party[0].city : '0' }`);
     const [selectedUf, setSelectedUf] =     useState(`${party[0].state? party[0].state : '0' }`);
-    
+   
+    const todayDate = new Date();
+    const todayString = todayDate.toString()
+
     useEffect(() => {
         axios
           .get<IBGEUFResponse[]>(
@@ -319,6 +322,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         placeholder="Data de Término"
                         value={date_init}
                         type="datetime-local"
+                        min={todayString} 
                         onChange={event => setDate_init(event.target.value)}
                         />
                 </label>
@@ -331,6 +335,7 @@ export function EditPartyModal({isOpen, onRequestClose}: NewPartyModalProps) {
                         placeholder="Data de Início"
                         value={date_close}
                         type="datetime-local"
+                        min={date_init}
                         onChange={event => setDate_close(event.target.value)}
                     />
                 </label>

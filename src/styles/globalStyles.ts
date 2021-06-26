@@ -158,6 +158,41 @@ export const GlobalStyle = createGlobalStyle`
             filter: brightness(0.8)
         }
     }
+    .modsUser {
+        width: 750px !important;
+    }
+    .dellType{
+        width: 750px !important;
+        height: 300px !important;
+
+        .excluir {
+            background: var(--red) !important;
+        }
+
+        button{
+            width: 49%;
+            padding: 0 1.5rem;
+            height: 4rem;
+            background: var(--green);
+            color: #FFF;
+            border-radius : 0.25rem;
+            border :0;
+
+            font-size : 1rem;
+            margin-top : 1.5rem;
+            font-weight : 600;
+
+            transition : filter 0.2s;
+
+
+        & + button {
+            margin-left: 2% ;
+        }
+        &:hover{
+            filter: brightness(0.9)
+        }
+    }
+    }
     .react-modalView-menu {
         position: absolute; 
         right: 1.5rem;

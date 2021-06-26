@@ -4,9 +4,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 
-import { NewPartyModal } from '../../components/modais/NewPartyModal';
-import { ViewPartyModal } from '../../components/modais/ViewPartyModal';
-import { EditUser } from '../../components/modais/EditUser';
+import { NewPartyModal } from '../../components/modais/parties/NewPartyModal';
+import { ViewPartyModal } from '../../components/modais/parties/ViewPartyModal';
+import { ViewUser } from '../../components/modais/users/ViewUser';
 // import { NewPartyModalcopy } from '../../components/modais/NewPartyModalcopy';
 
 import { useParties } from "../../hooks/useParties";
@@ -76,9 +76,9 @@ const Dashboard: React.FC = () => {
     function handleOpenViewPartyModal() {setIsViewPartyModalOpen(true);}
     function handleClosedViewPartyModal() {setIsViewPartyModalOpen(false);}
     
-    const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
-    function handleOpenEditUserModal() {setIsEditUserModalOpen(true);}
-    function handleClosedEditUserModal() {setIsEditUserModalOpen(false);}
+    const [isViewUserModalOpen, setIsViewUserModalOpen] = useState(false);
+    function handleOpenViewUserModal() {setIsViewUserModalOpen(true);}
+    function handleClosedViewUserModal() {setIsViewUserModalOpen(false);}
 
     // const copyParties = [...parties]
     const partiesSorted = [...parties]
@@ -99,9 +99,7 @@ const Dashboard: React.FC = () => {
             <HeaderView>    
                 <div>
                     <img alt="test" className="item logo" src={logoImg}/>
-                    
-                    {/* <h1>{users?.user.name}</h1> */}
-                    
+                                        
                     <div className="menuReact">
                             <Button
                                 aria-controls="simple-menu"
@@ -118,7 +116,7 @@ const Dashboard: React.FC = () => {
                             >
                                 {/* <MenuItem onClick={handleClose}>My Account</MenuItem> */}
                                 {/* <MenuItem onClick={handleClose}>Settings</MenuItem> */}
-                                <MenuItem onClick={handleOpenEditUserModal}>User</MenuItem>
+                                <MenuItem onClick={handleOpenViewUserModal}>User</MenuItem>
                                 <MenuItem onClick={handleSignOut}>Sair</MenuItem>
                             </Menu>
                             </div>
@@ -238,7 +236,7 @@ const Dashboard: React.FC = () => {
 
             <NewPartyModal  isOpen={isNewPartyModalOpen}    onRequestClose={handleClosedNewPartyModal} />
             <ViewPartyModal isOpen={isViewPartyModalOpen}   onRequestClose={handleClosedViewPartyModal} />
-            <EditUser       isOpen={isEditUserModalOpen}    onRequestClose={handleClosedEditUserModal} />
+            <ViewUser       isOpen={isViewUserModalOpen}    onRequestClose={handleClosedViewUserModal} />
 
             <Footer />
         </>

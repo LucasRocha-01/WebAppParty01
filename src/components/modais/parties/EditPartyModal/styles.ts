@@ -1,9 +1,22 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
+    .latlonglabel {
+        margin: 0;
+        padding:0;
+        font-size: 1.5rem;
+    }
 
+    .latlongSpan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .row {
-        margin: 20px;
+        width: 100%;
+        content: "";
+        clear: both;
+        display: table;
     }
     
     overflow: scroll;
