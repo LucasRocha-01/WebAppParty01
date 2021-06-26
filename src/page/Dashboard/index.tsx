@@ -11,7 +11,6 @@ import { ViewUser } from '../../components/modais/users/ViewUser';
 
 import { useParties } from "../../hooks/useParties";
 import { useAuth } from "../../hooks/AuthContext";
-import { useUsers } from '../../hooks/useUser';
 
 import { Container, BoxContent, NextEvent, Anuncio, InfoSemParty } from "./styles";
 import {BoxParty} from "../../components/BoxParty";
@@ -61,8 +60,6 @@ const Dashboard: React.FC = () => {
     
 
     const {parties, setSlugView} = useParties()
-    const { users } = useUsers();
-
     
     const { signOut } = useAuth();
     

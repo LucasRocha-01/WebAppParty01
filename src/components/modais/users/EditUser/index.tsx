@@ -3,11 +3,9 @@ import Modal from 'react-modal';
 
 import { useToast } from '../../../../hooks/toast';
 import { useUsers } from '../../../../hooks/useUser';
-import avatarImg from '../../../../assets/images/avatar.jpeg';
 
 import { Container } from './styles';
-import { FiCamera, FiTrash, FiX } from 'react-icons/fi';
-import { TiPencil } from 'react-icons/ti';
+import { FiX } from 'react-icons/fi';
 
 Modal.setAppElement('#root')
 

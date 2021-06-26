@@ -5,7 +5,7 @@ import { TiPencil } from 'react-icons/ti';
 import Modal from 'react-modal';
 
 import { EditPartyModal } from '../EditPartyModal';
-import { DellPartyModal } from '../DellpartyModal';
+// import { DellPartyModal } from '../DellpartyModal';
 
 import imgBanner from '../../../../assets/images/patternbanner.jpg';
 
@@ -48,10 +48,10 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
     function handleOpenEditPartyModal() {setIsEditPartyModalOpen(true);}
     function handleClosedEditPartyModal() {setIsEditPartyModalOpen(false);}
     
-    const [isDellPartyModalOpen, setIsDellPartyModalOpen] = useState(false);
+    // const [isDellPartyModalOpen, setIsDellPartyModalOpen] = useState(false);
 
-    function handleOpenDellPartyModal() {setIsDellPartyModalOpen(true);}
-    function handleClosedDellPartyModal() {setIsDellPartyModalOpen(false);}
+    // function handleOpenDellPartyModal() {setIsDellPartyModalOpen(true);}
+    // function handleClosedDellPartyModal() {setIsDellPartyModalOpen(false);}
     
     return (
         <Modal 
@@ -199,7 +199,7 @@ export function ViewPartyModal({isOpen, onRequestClose}: ViewPartyModalProps, {t
             </Container>
 
             <EditPartyModal  isOpen={isEditPartyModalOpen}    onRequestClose={handleClosedEditPartyModal} />
-            <DellPartyModal  isOpen={isDellPartyModalOpen}    onRequestClose={handleClosedDellPartyModal} />
+            {/* <DellPartyModal  isOpen={isDellPartyModalOpen}    onRequestClose={handleClosedDellPartyModal} /> */}
         </Modal>
     )
 }

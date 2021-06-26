@@ -2,7 +2,6 @@ import { FiX } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { useAuth } from '../../../../hooks/AuthContext';
 
-import { useUsers } from '../../../../hooks/useUser';
 import api from '../../../../services/api';
 
 import { Container } from './styles';
@@ -15,16 +14,12 @@ interface NewPartyModalProps {
 }
 
 export function DellUser({isOpen, onRequestClose}: NewPartyModalProps) {
-    const { users } = useUsers();
     const { signOut } = useAuth();
     
-    async function handleRemoveUser() {
+    function handleRemoveUser() {
         
-        const response = await api.delete('/owner/profile/delete')
+        api.delete('/owner/profile/delete')
         
-        if (response.status === 200) {
-            await signOut()
-        }
     }
     return (
         <Modal 
